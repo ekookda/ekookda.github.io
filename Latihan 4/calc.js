@@ -29,20 +29,24 @@ const hitung = () => {
 		let r = Number(document.getElementById("jari").value);
 		let s = Number(document.getElementById("garis_pelukis").value);
 		let t = Number(document.getElementById("tinggi").value);
-		console.log(phi);
+		// console.log(phi);
 
-		console.log("LuasPermukaanKerucut = " + luasPermukaanKerucut(r, s));
-		console.log("VolumeKerucut = " + volumeKerucut(r, t));
+		volumeKerucut(r, t);
+		luasPermukaanKerucut(r, s);
 	}
 };
 
 // function calculate volume kerucut
 const volumeKerucut = (r, t) => {
-	return (phi * r * r * t) / 3;
+	let volumeKerucut = (phi * r * r * t) / 3;
+	document.getElementById("hasilVolume").innerHTML =
+		volumeKerucut.toFixed(2) + " m<sup>3</sup>";
 };
 
 //function calculate luas permukaan kerucut
 const luasPermukaanKerucut = (r, s) => {
-	// return phi * r * s + phi * r * r;
-	return phi * r * (r + s);
+	let luas = phi * r * s + phi * r * r;
+	// let luas = phi * r * (r + s);
+	document.getElementById("hasilLuasPermukaan").innerHTML =
+		luas.toFixed(2) + " m<sup>2</sup>";
 };
