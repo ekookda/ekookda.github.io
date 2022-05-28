@@ -1,8 +1,7 @@
 const phi = Math.PI;
 const d = new Date();
 
-// Jam saat ini
-let h = d.getHours();
+// Fungsi keterangan waktu saat akses
 const hour = (h) => {
 	if (h >= 0 && h <= 11) {
 		return "Selamat Pagi";
@@ -17,36 +16,48 @@ const hour = (h) => {
 	}
 };
 
-// Tombol hitung di klik
-const hitung = () => {
-	if (
-		document.getElementById("jari").value === "" ||
-		document.getElementById("garis_pelukis").value === "" ||
-		document.getElementById("tinggi").value === ""
-	) {
-		alert("Masukan tidak boleh kosong");
+// Check input prompt
+const checkInput = (n) => {
+	if (n == null || n == "") {
+		return false;
 	} else {
-		let r = Number(document.getElementById("jari").value);
-		let s = Number(document.getElementById("garis_pelukis").value);
-		let t = Number(document.getElementById("tinggi").value);
-		// console.log(phi);
-
-		volumeKerucut(r, t);
-		luasPermukaanKerucut(r, s);
+		return true;
 	}
 };
 
-// function calculate volume kerucut
-const volumeKerucut = (r, t) => {
-	let volumeKerucut = (phi * r * r * t) / 3;
-	document.getElementById("hasilVolume").innerHTML =
-		volumeKerucut.toFixed(2) + " m<sup>3</sup>";
+// Tombol hitung di klik
+const hitung = () => {
+	let r = document.getElementById("jari").value;
+	let s = document.getElementById("garis_pelukis").value;
+	let t = document.getElementById("tinggi").value;
+
+	if (
+		// Validasi input sudah terisi atau kosong
+		checkInput(r) == false ||
+		checkInput(s) == false ||
+		checkInput(t) == false
+	) {
+		alert("Masukkan tidak boleh kosong");
+	} else {
+		// Mengecek input angka atau bukan
+		if (isNaN(r) || isNaN(s) || isNaN(t)) {
+			alert("Input tidak valid harus berupa angka");
+		} else {
+			// Meletakkan hasil perhitungan pada elemen dengan ID
+			document.getElementById("hasilVolume").innerHTML =
+				volumeKerucut(r, t).toFixed(2) + " m<sup>3</sup>";
+			document.getElementById("hasilLuasPermukaan").innerHTML =
+				luasPermukaanKerucut(r, s).toFixed(2) + " m<sup>2</sup>";
+		}
+	}
 };
 
-//function calculate luas permukaan kerucut
+// Fungsi menghitung volume kerucut
+const volumeKerucut = (r, t) => {
+	return (phi * r * r * t) / 3;
+};
+
+//Fungsi menghitung luas permukaan kerucut
 const luasPermukaanKerucut = (r, s) => {
-	let luas = phi * r * s + phi * r * r;
-	// let luas = phi * r * (r + s);
-	document.getElementById("hasilLuasPermukaan").innerHTML =
-		luas.toFixed(2) + " m<sup>2</sup>";
+	return phi * r * s + phi * r * r;
 };
