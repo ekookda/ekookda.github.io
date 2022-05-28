@@ -25,6 +25,16 @@ const checkInput = (n) => {
 	}
 };
 
+// Fungsi menghitung volume kerucut
+const volumeKerucut = (r, t) => {
+	return (phi * r * r * t) / 3;
+};
+
+//Fungsi menghitung luas permukaan kerucut
+const luasPermukaanKerucut = (r, s) => {
+	return phi * r * s + phi * r * r;
+};
+
 // Tombol hitung di klik
 const hitung = () => {
 	let r = document.getElementById("jari").value;
@@ -50,14 +60,4 @@ const hitung = () => {
 				luasPermukaanKerucut(r, s).toFixed(2) + " m<sup>2</sup>";
 		}
 	}
-};
-
-// Fungsi menghitung volume kerucut
-const volumeKerucut = (r, t) => {
-	return (phi * r * r * t) / 3;
-};
-
-//Fungsi menghitung luas permukaan kerucut
-const luasPermukaanKerucut = (r, s) => {
-	return phi * r * s + phi * r * r;
 };
