@@ -147,9 +147,11 @@
 		></script>
 		<script src="calc.js"></script>
 		<script>
-			let personName = prompt("Masukkan Nama Anda");
-			let h = d.getHours();
-			document.getElementById("day").innerHTML = hour(h);
+			let personName = prompt("Masukkan Nama Anda"); // Input Nama dari Prompt
+			let h = d.getHours(); // Mengambil angka waktu saat ini
+			document.getElementById("day").innerHTML = hour(h); // Menampilkan keterangan waktu saat ini
+
+			// Validasi input dari prompt
 			checkInput(personName)
 				? (document.getElementById("name").innerHTML = personName + "!")
 				: alert("Nama tidak boleh kosong!");
