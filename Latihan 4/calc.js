@@ -16,7 +16,7 @@ const hour = (h) => {
 	}
 };
 
-// Check input sudah terisi atau kosong
+// Check input sudah terisi atau kosongq\]
 const checkInput = (n) => {
 	if (n == null || n == "") {
 		return false;
