@@ -91,7 +91,7 @@
                                 <img src="https://www.static-src.com/frontend/static/img/cart-empty.3e6fae9.svg"
                                     alt="Empty Cart" class="card-img-top">
                                 <div class="card-body">
-                                    <h6 class="card-title text-center">Keranjang kamu masih kosong</h6>
+                                    <h6 class="card-title text-center productname">Keranjang kamu masih kosong</h6>
                                     <p class="card-text text-center">
                                         <small>Kalau ada yang cocok di hati,<br>langsung saja tambahkan kesini!</small>
                                     </p>
@@ -181,25 +181,26 @@
                                 class="card-img-top" alt="Image MK7217">
                         </div>
                         <div class="card-body">
-                            <h6 class="card-title text-center">Michael Kors Lexington Woman</h6>
-                            <p class="card-text">
+                            <h6 class="card-title text-center productname">Michael Kors Lexington Woman</h6>
+                            <div class="card-text">
                                 <table class="table">
                                     <tr>
                                         <th>SKU</th>
                                         <td>:</td>
-                                        <td>MK-7217</td>
+                                        <td class="sku">MK-7217</td>
                                     </tr>
                                     <tr>
                                         <th>Price</th>
                                         <td>:</td>
-                                        <td>Rp. 2.629.000</td>
+                                        <td class="price">Rp. 2.629.000</td>
                                     </tr>
                                 </table>
-                            </p>
+                            </div>
                             <div class="input-group mb-1">
-                                <input type="number" name="fAddToCart" class="form-control" placeholder="Add To Cart"
-                                    min="0" aria-label="Add To Cart" aria-describedby="btn-addToCart">
-                                <button class="btn btn-primary" type="button" id="btn-mk7217">
+                                <input type="number" name="fAddToCart" class="form-control quantity"
+                                    placeholder="Add To Cart" min="0" aria-label="Add To Cart"
+                                    aria-describedby="btn-addToCart">
+                                <button class="btn btn-primary addtocart" type="button" id="btn-mk7217">
                                     <i class="fas fa-cart-plus"></i>
                                 </button>
                             </div>
@@ -218,25 +219,27 @@
                                 class="card-img-top" alt="Image ACF-6457">
                         </div>
                         <div class="card-body">
-                            <h6 class="card-title text-center">Alexandre Christie Passion Men Chronograph Black</h6>
-                            <p class="card-text">
+                            <h6 class="card-title text-center productname">Alexandre Christie Passion Men Chronograph
+                                Black</h6>
+                            <div class="card-text">
                                 <table class="table">
                                     <tr>
                                         <th>SKU</th>
                                         <td>:</td>
-                                        <td>AC-6457</td>
+                                        <td class="sku">AC-6457</td>
                                     </tr>
                                     <tr>
                                         <th>Price</th>
                                         <td>:</td>
-                                        <td>Rp. 1.235.000</td>
+                                        <td class="price">Rp. 1.235.000</td>
                                     </tr>
                                 </table>
-                            </p>
+                            </div>
                             <div class="input-group mb-1">
-                                <input type="number" name="fAddToCart" class="form-control" placeholder="Add To Cart"
-                                    min="0" aria-label="Add To Cart" aria-describedby="btn-addToCart">
-                                <button class="btn btn-primary" type="button" id="btn-ac6457">
+                                <input type="number" name="fAddToCart" class="form-control quantity"
+                                    placeholder="Add To Cart" min="0" aria-label="Add To Cart"
+                                    aria-describedby="btn-addToCart">
+                                <button class="btn btn-primary addtocart" type="button" id="btn-ac6457">
                                     <i class="fas fa-cart-plus"></i>
                                 </button>
                             </div>
@@ -255,25 +258,16 @@
                                 class="card-img-top" alt="Image ACF-6457">
                         </div>
                         <div class="card-body">
-                            <h6 class="card-title text-center">Armani Exchange Chronograph Men Black Rubber Strap</h6>
-                            <p class="card-text">
-                                <table class="table">
-                                    <tr>
-                                        <th>SKU</th>
-                                        <td>:</td>
-                                        <td>AX-1348</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Price</th>
-                                        <td>:</td>
-                                        <td>Rp. 1.500.000</td>
-                                    </tr>
-                                </table>
-                            </p>
-                            <div class="input-group mb-1">
-                                <input type="number" name="fAddToCart" class="form-control" placeholder="Add To Cart"
-                                    min="0" aria-label="Add To Cart" aria-describedby="btn-addToCart">
-                                <button class="btn btn-primary" type="button" id="btn-ax1348">
+                            <div class="card-text">
+                                <h6 class="card-title text-center productname">Armani Exchange Chronograph Men Black
+                                    Rubber
+                                    Strap</h6>
+                                <p class="sku">AX-1348</p>
+                                <p class="price">Rp. 1.500.000</p>
+                                <input type="number" name="fAddToCart" class="form-control quantity"
+                                    placeholder="Add To Cart" min="0" aria-label="Add To Cart"
+                                    aria-describedby="btn-addToCart">
+                                <button class="btn btn-primary addtocart" type="button" id="btn-ax1348">
                                     <i class="fas fa-cart-plus"></i>
                                 </button>
                             </div>
@@ -292,33 +286,34 @@
                                 class="card-img-top" alt="Image FJ-3028">
                         </div>
                         <div class="card-body">
-                            <h6 class="card-title text-center">Fjord Vendela Men Black Dial Green Leather Strap
+                            <h6 class="card-title text-center productname">Fjord Vendela Men Black Dial Green Leather
+                                Strap
                             </h6>
-                            <p class="card-text">
+                            <div class="card-text">
                                 <table class="table">
                                     <tr>
                                         <th>SKU</th>
                                         <td>:</td>
-                                        <td>FJ-3028</td>
+                                        <td class="sku">FJ-3028</td>
                                     </tr>
                                     <tr>
                                         <th>Price</th>
                                         <td>:</td>
-                                        <td>Rp. 624.000</td>
+                                        <td class="price">Rp. 624.000</td>
                                     </tr>
                                 </table>
-                            </p>
+                            </div>
                             <div class="input-group mb-1">
-                                <input type="number" name="fAddToCart" class="form-control" placeholder="Add To Cart"
-                                    min="0" aria-label="Add To Cart" aria-describedby="btn-addToCart">
-                                <button class="btn btn-primary" type="button" id="btn-fj3028">
+                                <input type="number" name="fAddToCart" class="form-control quantity"
+                                    placeholder="Add To Cart" min="0" aria-label="Add To Cart"
+                                    aria-describedby="btn-addToCart">
+                                <button class="btn btn-primary addtocart" type="button" id="btn-fj3028">
                                     <i class="fas fa-cart-plus"></i>
                                 </button>
                             </div>
                         </div> <!-- End .card-body -->
                     </div> <!-- End .card -->
                 </div> <!-- End .col-sm-3 mt-0 p-2  -->
-
             </div> <!-- End .row bg-secondary -->
         </div> <!-- End .container -->
         <hr>
