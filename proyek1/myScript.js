@@ -7,6 +7,18 @@ for (let i = 0; i < btnCart.length; i++) {
 	});
 }
 
+// NumberFormat Rupiah
+const rupiah = (angka) => {
+	return new Intl.NumberFormat("id-ID", {
+		style: "currency",
+		currency: "IDR",
+	}).format(angka);
+};
+
+const toAngka = (rupiah) => {
+	return parseInt(rupiah.replace(/,.*|\D/g, ""), 10);
+};
+
 // Function addToCart
 const addToCart = (e) => {
 	// initialize
@@ -22,16 +34,16 @@ const addToCart = (e) => {
 	while ((e = e.previousSibling)) {
 		// console.log(e);
 		if (e.nodeType === 3) continue; // text nodex
-		if (e.className.match(/price/) == "price") {
-			getProductPrice = e.innerText;
+		if (e.className.match("price") == "price") {
+			getProductPrice = toAngka(e.innerText);
 		}
-		if (e.className.match(/productname/) == "productname") {
+		if (e.className.match("productname") == "productname") {
 			getProductName = e.innerText;
 		}
-		if (e.className.match(/sku/) == "sku") {
+		if (e.className.match("sku") == "sku") {
 			getSKU = e.innerText;
 		}
-		if (e.className.match(/quantity/) == "quantity") {
+		if (e.className.match("quantity") == "quantity") {
 			getProductQuantity = e.value;
 		}
 		sibs.push(e);
@@ -75,13 +87,15 @@ const addToCart = (e) => {
 /* Calculate Cart Total */
 const updateCartTotal = () => {
 	//init
+	let sumPrice = 0;
 	let total = 0;
-	let price = 0;
 	let items = 0;
 	let no = 1;
 	let productName = null;
 	let productSKU = null;
 	let productQty = null;
+	let productPrice = null;
+	let qtyItem = 0;
 	let cartTable = "";
 	if (sessionStorage.getItem("cart")) {
 		//get cart data & parse to array
@@ -94,10 +108,12 @@ const updateCartTotal = () => {
 			//convert each JSON product in array back into object
 			let x = JSON.parse(cart[i]);
 			//get property value of price
-			price = parseFloat(x.price.split("Rp ")[1]);
+			// price = parseFloat(x.price.split("Rp ")[1]);
+			productPrice = x.price;
 			productName = x.productname;
 			productSKU = x.sku;
 			productQty = x.quantity;
+			sumPrice = productPrice * productQty;
 
 			//add price to total
 			cartTable +=
@@ -107,26 +123,27 @@ const updateCartTotal = () => {
 				productName +
 				"</td><td>" +
 				productSKU +
-				"</td><td>" +
+				'</td><td class="text-center">' +
 				productQty +
 				"</td><td>Rp " +
-				price.toFixed(6) +
+				productPrice +
+				"</td><td>" +
+				rupiah(sumPrice) +
 				"</td>" +
-				'<td><i class="fas fa-window-close" style="color:red ">' +
+				'<td class="text-center"><button class=""><i class="fas fa-window-close" style="color:red "></button>' +
 				"</td></tr>";
-			total += price;
+			total += sumPrice;
+			qtyItem += parseInt(productQty);
 			no++;
 		}
+		console.log(total);
 	}
 	//update total on website HTML
-	// document.getElementById("total").innerHTML = total.toFixed(2);
-	console.log("Carttable ", cartTable);
-	console.log("Items ", items);
-	console.log("Total ", total);
+	document.getElementById("totalPrice").innerHTML = rupiah(total);
 	// insert saved products to cart table
 	document.getElementById("cartTable").innerHTML = cartTable;
 	//update items in cart on website HTML
-	// document.getElementById("itemsquantity").innerHTML = items;
+	document.getElementById("totalItem").innerHTML = qtyItem;
 };
 
 //user feedback on successful add
