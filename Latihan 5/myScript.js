@@ -100,7 +100,7 @@ const updateCartTotal = () => {
 		let cart = JSON.parse(sessionStorage.getItem("cart"));
 		//get no of items in cart
 		items = cart.length;
-		console.log(cart);
+
 		//loop over cart array
 		for (let i = 0; i < items; i++) {
 			//convert each JSON product in array back into object
@@ -134,7 +134,6 @@ const updateCartTotal = () => {
 			qtyItem += parseInt(productQty);
 			no++;
 		}
-		console.log(total);
 	}
 	//update total on website HTML
 	document.getElementById("totalPrice").innerHTML = rupiah(total);
