@@ -180,7 +180,7 @@
                         <div class="card-body">
                             <h6 class="card-title text-center productname">Michael Kors Lexington Woman</h6>
                             <p class="card-text p-0 m-0 sku">MK-7217</p>
-                            <p class="card-text p-0 mb-0 price">Rp 2.629.000</p>
+                            <p class="card-text p-0 mb-0 price" id="price">Rp 2.629.000</p>
                             <input type="number" name="fAddToCart" class="form-control quantity"
                                 placeholder="Add To Cart" min="0" aria-label="Add To Cart"
                                 aria-describedby="btn-addToCart">
@@ -201,7 +201,7 @@
                                 Alexandre Christie Passion Men Chronograph Black
                             </h6>
                             <p class="card-text p-0 m-0 sku">AC-6457</p>
-                            <p class="card-text p-0 mb-0 price">Rp 1.235.000</p>
+                            <p class="card-text p-0 mb-0 price" id="price">Rp 1.235.000</p>
                             <input type="number" name="fAddToCart" class="form-control quantity"
                                 placeholder="Add To Cart" min="0" aria-label="Add To Cart"
                                 aria-describedby="btn-addToCart">
@@ -221,7 +221,7 @@
                                 Armani Exchange Chronograph Men Black Rubber Strap
                             </h6>
                             <p class="card-text p-0 m-0 sku">AX-1348</p>
-                            <p class="card-text p-0 mb-0 price">Rp 1.500.000</p>
+                            <p class="card-text p-0 mb-0 price" id="price">Rp 1.500.000</p>
                             <input type="number" name="fAddToCart" class="form-control quantity"
                                 placeholder="Add To Cart" min="0" aria-label="Add To Cart"
                                 aria-describedby="btn-addToCart">
@@ -241,7 +241,7 @@
                                 Fjord Vendela Men Black Dial Green Leather Strap
                             </h6>
                             <p class="card-text p-0 m-0 sku">FJ-3028</p>
-                            <p class="card-text p-0 mb-0 price">Rp 624.000</p>
+                            <p class="card-text p-0 mb-0 price" id="price">Rp 624.000</p>
                             <input type="number" name="fAddToCart" class="form-control quantity"
                                 placeholder="Add To Cart" min="0" aria-label="Add To Cart"
                                 aria-describedby="btn-addToCart">
@@ -262,51 +262,46 @@
                 <h2 class="text-center mt-3 mb-0 pb-0">
                     <i class="fas fa-shopping-bag"></i> Checkout
                 </h2>
-                <div class="alert" class="text-start text-danger"></div>
+                <div id="alerts" class="text-start text-info"></div>
                 <table id="dataTable" class="table table-sm table-hover table-bordered mt-0">
                     <thead class="table-dark text-center">
                         <tr>
                             <th>No</th>
                             <th>Nama Barang</th>
                             <th>SKU</th>
-                            <th>Kuantitas</th>
-                            <th>Harga</th>
+                            <th>Qty</th>
+                            <th>Hrg Satuan</th>
+                            <th>Jml Hrg</th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody id="cartTable">
-                        <tr>
-                            <td class="text-center">1</td>
-                            <td>Alexandre Christie Passion Men Chronograph Black</td>
-                            <td class="text-center">AC-6457</td>
-                            <td class="text-center">1</td>
-                            <td class="text-end">Rp. 1.235.000</td>
-                            <td class="text-center">
-                                <i class="fas fa-window-close" style="color:red"></i>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <tbody id="cartTable"></tbody>
                     <tfoot>
                         <tr class="text-center">
                             <th>No</th>
                             <th>Nama Barang</th>
                             <th>SKU</th>
                             <th>Kuantitas</th>
-                            <th>Harga</th>
+                            <th>Hrg Satuan</th>
+                            <th>Jml Harga</th>
                             <th></th>
                         </tr>
                         <tr>
                             <td colspan="3"></td>
                             <td class="text-dark text-center">Total Item</td>
-                            <td id="totalItem" colspan="2"></td>
+                            <td id="totalItem" colspan="3"></td>
                         </tr>
                         <tr>
                             <td colspan="3"></td>
                             <td class="text-dark text-center">Total Harga</td>
-                            <td id="totalPrice" colspan="2"></td>
+                            <td id="totalPrice" colspan="3"></td>
                         </tr>
                     </tfoot>
                 </table>
+                <button type="button" onclick="emptyCart()" id="emptyCart" class="btn btn-outline-danger mb-3">Empty
+                    Cart</button>
+                <button type="button" onclick="checkOut()" id="checkOut"
+                    class="btn btn-outline-success mb-3 ms-1 float-end">Checkout</button>
             </div> <!-- End .table-responsive -->
         </div> <!-- End .container shadow -->
         <hr class="mb-0">
@@ -626,9 +621,6 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
     <script src="myScript.js"></script>
-    <script type="javascript">
-
-    </script>
 </body>
 
 </html>
