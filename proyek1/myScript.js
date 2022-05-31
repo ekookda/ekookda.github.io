@@ -22,16 +22,16 @@ const addToCart = (e) => {
 	while ((e = e.previousSibling)) {
 		// console.log(e);
 		if (e.nodeType === 3) continue; // text nodex
-		if (e.className == "card-text p-0 mb-0 price") {
+		if (e.className.match(/price/) == "price") {
 			getProductPrice = e.innerText;
 		}
-		if (e.className == "card-title text-center productname") {
+		if (e.className.match(/productname/) == "productname") {
 			getProductName = e.innerText;
 		}
-		if (e.className == "card-text p-0 m-0 sku") {
+		if (e.className.match(/sku/) == "sku") {
 			getSKU = e.innerText;
 		}
-		if (e.className == "form-control quantity") {
+		if (e.className.match(/quantity/) == "quantity") {
 			getProductQuantity = e.value;
 		}
 		sibs.push(e);
