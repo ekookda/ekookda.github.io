@@ -19,69 +19,83 @@ const toAngka = (rupiah) => {
 	return parseInt(rupiah.replace(/,.*|\D/g, ""), 10);
 };
 
+// Fungsi untuk mengecek input sudah terisi atau kosong
+const checkInput = (n) => {
+	if (n == null || n == "") {
+		return false;
+	} else {
+		return true;
+	}
+};
+
 // Function addToCart
 const addToCart = (e) => {
-	// initialize
-	let getProductName = null;
-	let getSKU = null;
-	let getProductPrice = null;
-	let getProductQuantity = null;
-	let sibs = [];
-	let cart = [];
-	let count = 0;
-
-	//cycles siblings for product info near the add button
-	while ((e = e.previousSibling)) {
-		// console.log(e);
-		if (e.nodeType === 3) continue; // text nodex
-		if (e.className.match("price") == "price") {
-			getProductPrice = toAngka(e.innerText);
-		}
-		if (e.className.match("productname") == "productname") {
-			getProductName = e.innerText;
-		}
-		if (e.className.match("sku") == "sku") {
-			getSKU = e.innerText;
-		}
-		if (e.className.match("quantity") == "quantity") {
-			getProductQuantity = e.value;
-		}
-		sibs.push(e);
-	}
-
-	//create product object
-	const product = {
-		productname: getProductName,
-		price: getProductPrice,
-		sku: getSKU,
-		quantity: getProductQuantity,
-	};
-
-	//convert product data to JSON for storage
-	let stringProduct = JSON.stringify(product);
-
-	/*send product data to session storage */
-	if (!sessionStorage.getItem("cart")) {
-		//append product JSON object to cart array
-		cart.push(stringProduct);
-		//cart to JSON
-		stringCart = JSON.stringify(cart);
-		//create session storage cart item
-		sessionStorage.setItem("cart", stringCart);
-		addedToCart(getProductName);
-		updateCartTotal();
+	if (checkInput((e.value = null || e.value == "" || e.value == 0))) {
+		alert("Masukkan tidak boleh kosong");
 	} else {
-		//get existing cart data from storage and convert back into array
-		cart = JSON.parse(sessionStorage.getItem("cart"));
-		//append new product JSON object
-		cart.push(stringProduct);
-		//cart back to JSON
-		stringCart = JSON.stringify(cart);
-		//overwrite cart data in sessionstorage
-		sessionStorage.setItem("cart", stringCart);
-		updateCartTotal();
+		// initialize
+		let getProductName = null;
+		let getSKU = null;
+		let getProductPrice = null;
+		let getProductQuantity = null;
+		let sibs = [];
+		let cart = [];
+
+		//cycles siblings for product info near the add button
+		while ((e = e.previousSibling)) {
+			// console.log(e);
+			if (e.nodeType === 3) continue; // text nodex
+			if (e.className.match("price") == "price") {
+				getProductPrice = toAngka(e.innerText);
+			}
+			if (e.className.match("productname") == "productname") {
+				getProductName = e.innerText;
+			}
+			if (e.className.match("sku") == "sku") {
+				getSKU = e.innerText;
+			}
+
+			if (e.className.match("quantity") == "quantity") {
+				getProductQuantity = e.value;
+			}
+
+			sibs.push(e);
+		}
+
+		//create product object
+		const product = {
+			productname: getProductName,
+			price: getProductPrice,
+			sku: getSKU,
+			quantity: getProductQuantity,
+		};
+
+		//convert product data to JSON for storage
+		let stringProduct = JSON.stringify(product);
+
+		/*send product data to session storage */
+		if (!sessionStorage.getItem("cart")) {
+			//append product JSON object to cart array
+			cart.push(stringProduct);
+			//cart to JSON
+			stringCart = JSON.stringify(cart);
+			//create session storage cart item
+			sessionStorage.setItem("cart", stringCart);
+			addedToCart(getProductName);
+			updateCartTotal();
+		} else {
+			//get existing cart data from storage and convert back into array
+			cart = JSON.parse(sessionStorage.getItem("cart"));
+			//append new product JSON object
+			cart.push(stringProduct);
+			//cart back to JSON
+			stringCart = JSON.stringify(cart);
+			//overwrite cart data in sessionstorage
+			sessionStorage.setItem("cart", stringCart);
+			updateCartTotal();
+		}
+		console.log(cart);
 	}
-	console.log(cart);
 };
 
 /* Calculate Cart Total */
