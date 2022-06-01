@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="images/favicon/favicon.ico" type="image/x-icon">
     <style>
@@ -28,8 +29,23 @@
             color: #ffc107 !important;
         }
 
-        .heart {
-            color: red;
+        #wishlist1,
+        #wishlist2,
+        #wishlist3,
+        #wishlist4 {
+            color: black;
+            font-size: 24px;
+
+        }
+
+        .subscribe {
+            color: red !important;
+            font-size: 24px;
+        }
+
+        .unsubscribe {
+            color: grey !important;
+            font-size: 24px;
         }
 
         /* ============ desktop view ============ */
@@ -185,8 +201,8 @@
                         </a>
                         <div class="card-body">
                             <h6 class="card-title text-center productname">Michael Kors Lexington Woman</h6>
-                            <span class="badge rounded-pill positionl float-end px-3 m-2 wishlist" id="wishlist1">
-                                <i class="far fa-heart" style="color: #000; font-size:24px;"></i>
+                            <span class="badge rounded-pill positionl float-end px-3 m-2">
+                                <i class="far fa-heart" id="wishlist1"></i>
                             </span>
                             <p class="card-text p-0 m-0 sku">MK-7217</p>
                             <p class="card-text p-0 mb-0 price" id="price">Rp 2.629.000</p>
@@ -211,8 +227,8 @@
                             <h6 class="card-title text-center productname">
                                 Alexandre Christie Passion Men Chronograph Black
                             </h6>
-                            <span class="badge rounded-pill positionl float-end px-3 m-2 wishlist" id="wishlist2">
-                                <i class="far fa-heart" style="color: #000; font-size:24px;"></i>
+                            <span class="badge rounded-pill positionl float-end px-3 m-2">
+                                <i class="far fa-heart" id="wishlist2"></i>
                             </span>
                             <p class="card-text p-0 m-0 sku">AC-6457</p>
                             <p class="card-text p-0 mb-0 price" id="price">Rp 1.235.000</p>
@@ -235,8 +251,8 @@
                             <h6 class="card-title text-center productname">
                                 Armani Exchange Chronograph Men Black Rubber Strap
                             </h6>
-                            <span class="badge rounded-pill positionl float-end px-3 m-2 wishlist" id="wishlist3">
-                                <i class="far fa-heart" style="color: #000; font-size:24px;"></i>
+                            <span class="badge rounded-pill positionl float-end px-3 m-2">
+                                <i class="far fa-heart" id="wishlist3"></i>
                             </span>
                             <p class="card-text p-0 m-0 sku">AX-1348</p>
                             <p class="card-text p-0 mb-0 price" id="price">Rp 1.500.000</p>
@@ -260,8 +276,8 @@
                             <h6 class="card-title text-center productname">
                                 Fjord Vendela Men Black Dial Green Leather Strap
                             </h6>
-                            <span class="badge rounded-pill positionl float-end px-3 m-2 wishlist" id="wishlist4">
-                                <i class="far fa-heart" style="color: #000; font-size:24px;"></i>
+                            <span class="badge rounded-pill positionl float-end px-3 m-2">
+                                <i class="far fa-heart" id="wishlist4"></i>
                             </span>
                             <p class="card-text p-0 m-0 sku">FJ-3028</p>
                             <p class="card-text p-0 mb-0 price" id="price">Rp 624.000</p>
@@ -281,7 +297,7 @@
     <div class="container-fluid mb-0">
         <div class="container shadow">
             <div class="table-responsive mt-5 p-0">
-                <h2 class="text-center mt-3 mb-0 pb-0">
+                <h2 class="text-center mt-3 mb-0 pb-3">
                     <i class="fas fa-shopping-bag"></i> Checkout
                 </h2>
                 <div id="alerts" class="text-start text-info"></div>
@@ -663,36 +679,35 @@
             $("#fTglLahir").datepicker();
             // Image Zoom
             $('.zoom').zoom();
+            // function subscribe
+            const subscribe = function (id, className) {
+                if (className == 'far fa-heart') {
+                    $(`#${id}`).removeClass('far fa-heart').addClass('fas fa-heart subscribe');
+                } else {
+                    $(`#${id}`).removeClass('fas fa-heart subscribe').addClass('far fa-heart');
+                }
+            }
             // onclick wishlist button
-            const btnWhislist = $(".whislist");
             $('#wishlist1').click(function () {
-                $('#wishlist1').css('color', 'red');
+                let id = $('#wishlist1').attr('id');
+                let className = $('#wishlist1').attr('class');
+                subscribe(id, className);
             });
             $('#wishlist2').click(function () {
-                $('#wishlist2').css('color', 'red');
+                let id = $('#wishlist2').attr('id');
+                let className = $('#wishlist2').attr('class');
+                subscribe(id, className);
             });
             $('#wishlist3').click(function () {
-                $('#wishlist3').css('color', 'red');
+                let id = $('#wishlist3').attr('id');
+                let className = $('#wishlist3').attr('class');
+                subscribe(id, className);
             });
             $('#wishlist4').click(function () {
-                $('#wishlist4').css('color', 'red');
-
+                let id = $('#wishlist4').attr('id');
+                let className = $('#wishlist4').attr('class');
+                subscribe(id, className);
             });
-            /*
-                        $('#wishlist1').click(function () {
-                            $("#wishlist1").toggleClass('heart');
-                        });
-                        $('#wishlist2').click(function () {
-                            $("#wishlist2").toggleClass('heart');
-                        });
-                        $('#wishlist3').click(function () {
-                            $("#wishlist3").toggleClass('heart');
-                        });
-                        $('#wishlist4').click(function () {
-                            $("#wishlist4").toggleClass('heart');
-                        });
-            */
-
         });
     </script>
 </body>
