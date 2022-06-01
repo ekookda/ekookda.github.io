@@ -1,6 +1,5 @@
 // onclick addToCart
 const btnCart = document.getElementsByClassName("btn-cart");
-
 for (let i = 0; i < btnCart.length; i++) {
 	btnCart[i].addEventListener("click", function () {
 		addToCart(this);
@@ -15,12 +14,11 @@ const rupiah = (angka) => {
 	}).format(angka);
 };
 
-const toAngka = (rupiah) => {
-	return parseInt(rupiah.replace(/,.*|\D/g, ""), 10);
-};
+// function to convert string to number
+const toAngka = (rupiah) => parseInt(rupiah.replace(/,.*|\D/g, ""), 10);
 
 // Function addToCart
-const addToCart = (e) => {
+const addToCart = function (e) {
 	// initialize
 	let getProductName = null;
 	let getSKU = null;
@@ -83,7 +81,7 @@ const addToCart = (e) => {
 };
 
 /* Calculate Cart Total */
-const updateCartTotal = () => {
+const updateCartTotal = function () {
 	//init
 	let sumPrice = 0;
 	let total = 0;
@@ -144,7 +142,7 @@ const updateCartTotal = () => {
 };
 
 //user feedback on successful add
-const addedToCart = (pname) => {
+const addedToCart = function (pname) {
 	let message = pname + " was added to the cart";
 	let alerts = document.getElementById("alerts");
 	alerts.innerHTML = message;
@@ -154,7 +152,7 @@ const addedToCart = (pname) => {
 };
 
 /* User Manually empty cart */
-const emptyCart = () => {
+const emptyCart = function () {
 	//remove cart session storage object & refresh cart totals
 	if (sessionStorage.getItem("cart")) {
 		sessionStorage.removeItem("cart");
