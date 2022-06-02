@@ -43,6 +43,11 @@
             font-size: 24px;
         }
 
+        .autoCompleteList {
+            position: fixed;
+            z-index: 1030;
+        }
+
         /* ============ desktop view ============ */
         @media all and (min-width: 992px) {
             .navbar .nav-item .dropdown-menu {
@@ -79,7 +84,7 @@
 
             <!-- Search Box -->
             <div class="input-group p-2">
-                <input type="text" id="search-box" name="search-box" class="form-control" placeholder="Cari barang">
+                <input type="text" id="search-box" name="search-box" class="form-control" placeholder="Minimal 2 huruf">
                 <button class="btn btn-warning" type="submit"><i class="fas fa-search"></i></button>
             </div> <!-- end .input-group p-2 -->
 
@@ -691,6 +696,21 @@
                     wishlist(id, className);
                 });
             }
+
+            // Autocomplete search product
+            const listProduct = [
+                "Michael Kors Lexington Woman",
+                "Alexandre Christie Passion Men Chronograph Black",
+                "Armani Exchange Chronograph Men Black Rubber Strap",
+                "Fjord Vendela Men Black Dial Green Leather Strap",
+            ];
+            $("#search-box").autocomplete({
+                source: listProduct,
+                minLength: 2,
+                classes: {
+                    "ui-autocomplete": "autoCompleteList"
+                }
+            });
         });
     </script>
 </body>
