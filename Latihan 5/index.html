@@ -577,33 +577,38 @@
                     <form action="#">
                         <div class="mb-3">
                             <!-- Nama -->
-                            <label for="fname" class="form-label">Nama Lengkap</label>
+                            <label for="lname" class="form-label">Nama Lengkap</label>
                             <input type="text" class="form-control" name="fname" id="fname">
                         </div>
                         <div class="mb-3">
                             <!-- Password -->
-                            <label for="fpass" class="form-label">Password</label>
+                            <label for="lpass" class="form-label">Password</label>
                             <input type="password" class="form-control" name="fpass" id="fpass">
                         </div>
                         <div class="mb-3">
                             <!-- Tanggal Lahir -->
-                            <label for="fTglLahir" class="form-label">Tanggal Lahir</label>
+                            <label for="lTglLahir" class="form-label">Tanggal Lahir</label>
                             <input type="text" class="form-control" name="fTglLahir" id="fTglLahir">
                         </div>
                         <div class="mb-3">
                             <!-- Umur -->
-                            <label for="fumur" class="form-label">Umur</label>
+                            <label for="lumur" class="form-label">Umur</label>
                             <input type="number" class="form-control" name="fumur" id="fumur">
                         </div>
                         <div class="mb-3">
                             <!-- Email -->
-                            <label for="femail" class="form-label">Email</label>
+                            <label for="lemail" class="form-label">Email</label>
                             <input type="email" class="form-control" name="femail" id="femail">
                         </div>
                         <div class="mb-3">
                             <!-- Alamat -->
-                            <label for="fname" class="form-label">Alamat</label>
+                            <label for="lname" class="form-label">Alamat</label>
                             <textarea id="falamat" class="form-control" name="falamat" rows="5" cols="30"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <!-- Kode Pos -->
+                            <label for="lkodepos" class="form-label">Kode Pos</label>
+                            <input type="text" class="form-control" name="fkodepos" id="fkodepos">
                         </div>
                         <div class="d-grid gap-2">
                             <button type="button" name="btn-registrasi" id="btn-registrasi"
@@ -711,6 +716,49 @@
                     "ui-autocomplete": "autoCompleteList"
                 }
             });
+            // autocomplete kodepos at registration
+            $.getJSON(
+                "kodepos.json",
+                function (data) {
+                    console.log(data);
+                });
+            /*
+            function log(message) {
+                $("<div>").text(message).prependTo("#log");
+                $("#log").scrollTop(0);
+            }
+            $("#fkodepos").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "kodepos.json",
+                        dataType: "jsonp",
+                        data: {
+                            term: request.term
+                        },
+                        success: function (data) {
+                            response(data);
+                        }
+                    });
+                },
+                minLength: 2,
+                select: function (event, ui) {
+                    console.log(event);
+                    console.log(ui);
+                    //log("Selected: " + ui.item.value + " aka " + ui.item.id);
+                }
+            });
+            */
+            /*
+            $.getJSON("kodepos.json", function (data) {
+                autoComplete = [];
+                for (let i = 0, len = data.length; i < len; i++) {
+                    autoComplete.push(data[i].name + ", " + data[i].iata);
+                }
+                $("#fkodepos").autocomplete({
+                    source: autoComplete
+                });
+            });
+            */
         });
     </script>
 </body>
