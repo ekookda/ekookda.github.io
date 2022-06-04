@@ -608,7 +608,8 @@
                         <div class="mb-3">
                             <!-- Kode Pos -->
                             <label for="lkodepos" class="form-label">Kode Pos</label>
-                            <input type="text" class="form-control" name="fkodepos" id="fkodepos">
+                            <input type="text" class="form-control" id="fkodepos"
+                                data-placeholder="Ketik nama propinsi">
                         </div>
                         <div class="d-grid gap-2">
                             <button type="button" name="btn-registrasi" id="btn-registrasi"
@@ -717,48 +718,50 @@
                 }
             });
             // autocomplete kodepos at registration
-            $.getJSON(
-                "kodepos.json",
-                function (data) {
-                    console.log(data);
-                });
-            /*
-            function log(message) {
-                $("<div>").text(message).prependTo("#log");
-                $("#log").scrollTop(0);
-            }
-            $("#fkodepos").autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        url: "kodepos.json",
-                        dataType: "jsonp",
-                        data: {
-                            term: request.term
-                        },
-                        success: function (data) {
-                            response(data);
+            $('#fkodepos').keyup(function () {
+                $('#result').html('');
+                let kodepos = $(this).val();
+                let expression = new RegExp(kodepos, 'i');
+                $.getJSON("kodepos.json", function (data) {
+                    $.each(data, function (key, val) {
+                        if (key.search(expression) != -1 ||
+                            val.search(expression) != -1) {
+                            $('#result').append(
+                                `<option>${key} - ${val}</option>`
+                            );
                         }
                     });
-                },
-                minLength: 2,
-                select: function (event, ui) {
-                    console.log(event);
-                    console.log(ui);
-                    //log("Selected: " + ui.item.value + " aka " + ui.item.id);
-                }
-            });
-            */
-            /*
-            $.getJSON("kodepos.json", function (data) {
-                autoComplete = [];
-                for (let i = 0, len = data.length; i < len; i++) {
-                    autoComplete.push(data[i].name + ", " + data[i].iata);
-                }
-                $("#fkodepos").autocomplete({
-                    source: autoComplete
                 });
-            });
-            */
+                /*
+                $.ajax({
+                    type: 'GET',
+                    url: 'kodepos.json',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log('Data OK: ' + JSON.stringify(data));
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log('Error: ' + errorThrown + ' ' + textStatus + ' ' + jqXHR);
+                    }
+                });
+                */
+
+                /*
+                $.getJSON("kodepos.json", function (data) {
+                    $.each(data, function (key, val) {
+                        console.log(`${key} : ${val}`);
+                        //$('#result').append('<li>' + val.kodepos + '</li>');
+                    });
+                    autoComplete = [];
+                    for (let i = 0, len = data.length; i < len; i++) {
+                        autoComplete.push(data[i].name + ", " + data[i].iata);
+                    }
+                    $("#fkodepos").autocomplete({
+                        source: autoComplete
+                    });
+                    */
+            }); // end $.GetJSON
+
         });
     </script>
 </body>
