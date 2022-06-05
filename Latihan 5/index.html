@@ -11,6 +11,7 @@
     <!-- Bootstrap CSS v5.0.2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- FontAwesome 5.15.4 CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
@@ -608,6 +609,7 @@
                         <div class="mb-3">
                             <!-- Kode Pos -->
                             <label for="lkodepos" class="form-label">Kode Pos</label>
+                            <!-- <select class="js-data-example-ajax form-control" id="fkodepos" name="fkodepos"></select> -->
                             <input type="text" class="form-control" id="fkodepos"
                                 data-placeholder="Ketik nama propinsi">
                         </div>
@@ -674,6 +676,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- Jquery Zoom Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js"
         integrity="sha512-m5kAjE5cCBN5pwlVFi4ABsZgnLuKPEx0fOnzaH5v64Zi3wKnhesNUYq4yKmHQyTa3gmkR6YeSKW1S+siMvgWtQ=="
@@ -718,50 +721,29 @@
                 }
             });
             // autocomplete kodepos at registration
-            $('#fkodepos').keyup(function () {
-                $('#result').html('');
-                let kodepos = $(this).val();
-                let expression = new RegExp(kodepos, 'i');
-                $.getJSON("kodepos.json", function (data) {
-                    $.each(data, function (key, val) {
-                        if (key.search(expression) != -1 ||
-                            val.search(expression) != -1) {
-                            $('#result').append(
-                                `<option>${key} - ${val}</option>`
-                            );
-                        }
-                    });
-                });
-                /*
-                $.ajax({
-                    type: 'GET',
-                    url: 'kodepos.json',
+
+            $('#fkodepos').select2({
+                ajax: {
+                    url: 'https://raw.githubusercontent.com/ArrayAccess/Indonesia-Postal-And-Area/master/data/json/postal/62.json',
                     dataType: 'json',
-                    success: function (data) {
-                        console.log('Data OK: ' + JSON.stringify(data));
+                    type: 'GET',
+                    data: function (params) {
+                        search: params.term
+                        // Query parameters will be ?search=[term]&type=public
+                        //return query;
                     },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log('Error: ' + errorThrown + ' ' + textStatus + ' ' + jqXHR);
+                    result: function (data) {
+                        return {
+                            results: $.map(data, function (key, value) {
+                                return {
+                                    id: key,
+                                    text: value
+                                }
+                            }),
+                        }
                     }
-                });
-                */
-
-                /*
-                $.getJSON("kodepos.json", function (data) {
-                    $.each(data, function (key, val) {
-                        console.log(`${key} : ${val}`);
-                        //$('#result').append('<li>' + val.kodepos + '</li>');
-                    });
-                    autoComplete = [];
-                    for (let i = 0, len = data.length; i < len; i++) {
-                        autoComplete.push(data[i].name + ", " + data[i].iata);
-                    }
-                    $("#fkodepos").autocomplete({
-                        source: autoComplete
-                    });
-                    */
-            }); // end $.GetJSON
-
+                }
+            });
         });
     </script>
 </body>
