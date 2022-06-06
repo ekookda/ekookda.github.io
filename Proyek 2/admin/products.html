@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>BS Shop - Customers</title>
+    <title>BS Shop - Produks</title>
 
     <!-- Custom fonts for this template-->
     <link href="../src/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -56,11 +56,11 @@
                     <span>Dashboard</span></a>
             </li>
 
-            <!-- Nav Item - Customers -->
+            <!-- Nav Item - Produks -->
             <li class="nav-item">
                 <a class="nav-link" href="customers.html">
                     <i class="fas fa-fw fa-users"></i>
-                    <span>Customers</span></a>
+                    <span>Produks</span></a>
             </li>
 
             <!-- Nav Item - Produk -->
@@ -203,7 +203,11 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"></h6>
+                            <!-- Button Add New Product modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#addDataProduk">
+                                <i class="fas fa-plus-circle"></i>&nbsp;Add New Product
+                            </button>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -233,32 +237,40 @@
                                     <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td>Eko Okda</td>
-                                            <td>24-10-1987</td>
-                                            <td>eko.okda@gmail.com</td>
-                                            <td>Jalan Bandengan Utara 80, Penjaringan, Jakarta Utara</td>
+                                            <td>
+                                                <img src="https://assets.jamtangan.com/images/product/alexandre-christie/ACF-6457-MCLIPBA/1l.jpg"
+                                                    class="card-img-top" alt="Image AC6457">
+                                            </td>
+                                            <td>Alexandre Christie Passion Men Chronograph Black</td>
+                                            <td>AC-6457</td>
+                                            <td>10</td>
+                                            <td>Rp 1.235.000</td>
                                             <td>
                                                 <button type="button" class="btn btn-sm btn-primary"
                                                     data-bs-toggle="modal" data-bs-target="#updateDataProduk">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-danger delete" id="1">
+                                                <button type="button" class="btn btn-sm btn-danger delete" id="AC-6457">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>1</td>
-                                            <td>Sule</td>
-                                            <td>14-03-1990</td>
-                                            <td>sule.ovj@gmail.com</td>
-                                            <td>Jalan Mampang Prapatan No.7A, Jakarta Selatan</td>
+                                            <td>
+                                                <img src="https://assets.jamtangan.com/images/product/alexandre-christie/ACF-8331-MDBRGSL/1l.jpg"
+                                                    class="card-img-top" alt="Image MK7217">
+                                            </td>
+                                            <td>Michael Kors Lexington Woman</td>
+                                            <td>MK-7217</td>
+                                            <td>8</td>
+                                            <td>Rp 2.629.000</td>
                                             <td>
                                                 <button type='button' class="btn btn-sm btn-primary"
                                                     data-bs-toggle="modal" data-bs-target="#updateDataProduk">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-danger delete" id="2">
+                                                <button type="button" class="btn btn-sm btn-danger delete" id="MK-7217">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </td>
@@ -313,15 +325,14 @@
         </div>
     </div>
 
-    <!-- Modal Form Update -->
-    <div class="modal fade" id="updateDataProduk" tabindex="-1" aria-labelledby="updateDataProduk" aria-hidden="true">
+    <!-- Modal Form Add New Product -->
+    <div class="modal fade" id="addDataProduk" tabindex="-1" aria-labelledby="addDataProduk" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title text-center" id="updateDataProduk" aria-label="Close"><i
-                            class="fas fa-user"></i> Update
-                        Data Customer</h4>
+                    <h4 class="modal-title text-center" id="titleAddDataProduk" aria-label="Close"><i
+                            class="fab fa-product-hunt"></i>&nbsp;Add New Product</h4>
                     </h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
@@ -329,28 +340,85 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <form action="#">
+                        <!-- Nama Produk -->
                         <div class="mb-3">
-                            <!-- Nama -->
-                            <label for="lname" class="form-label">Nama Customer</label>
-                            <input type="text" class="form-control" name="fname" id="fname">
+                            <label for="lAddNamaProduk" class="form-label">Nama Produk</label>
+                            <input type="text" class="form-control" name="fAddNamaProduk" id="fAddNamaProduk">
                         </div>
+                        <!-- SKU -->
                         <div class="mb-3">
-                            <!-- Tanggal Lahir -->
-                            <label for="lTglLahir" class="form-label">Tanggal Lahir</label>
-                            <input type="text" class="form-control" name="fTglLahir" id="fTglLahir">
+                            <label for="lAddSKU" class="form-label">Nomor SKU</label>
+                            <input type="text" class="form-control" name="fAddSKU" id="fAddSKU">
                         </div>
+                        <!-- Stok -->
                         <div class="mb-3">
-                            <!-- Email -->
-                            <label for="lemail" class="form-label">Email</label>
-                            <input type="email" class="form-control" name="femail" id="femail" readonly>
+                            <label for="lAddStok" class="form-label">Stok</label>
+                            <input type="number" class="form-control" name="fAddStok" id="fAddStok">
                         </div>
+                        <!-- Alamat -->
                         <div class="mb-3">
-                            <!-- Alamat -->
-                            <label for="lname" class="form-label">Alamat</label>
-                            <textarea id="falamat" class="form-control" name="falamat" rows="5" cols="30"></textarea>
+                            <label for="lAddHargaSatuan" class="form-label">Harga Satuan</label>
+                            <input type="text" class="form-control" name="fAddHargaSatuan" id="fAddHargaSatuan">
+                        </div>
+                        <!-- Foto Produk -->
+                        <div class="mb-3">
+                            <label for="lAddImageProduk" class="form-label">File Foto</label>
+                            <input type="file" class="form-control" id="fAddImageProduk">
                         </div>
                         <div class="d-grid gap-2">
-                            <button type="button" name="btn-registrasi" id="btn-registrasi"
+                            <button type="button" name="btn-add-product" id="btn-add-product"
+                                class="btn btn-primary">Tambah Produk</button>
+                        </div>
+                    </form>
+                </div> <!-- end .modal-body -->
+            </div>
+        </div>
+    </div> <!-- End #Add New Product Modal -->
+    <!-- End .modal-fade / Modal Registration -->
+
+    <!-- Modal Form Update -->
+    <div class="modal fade" id="updateDataProduk" tabindex="-1" aria-labelledby="updateDataProduk" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title text-center" id="titleDataProduk" aria-label="Close"><i
+                            class="fab fa-product-hunt"></i> Update
+                        Data Produk</h4>
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="#">
+                        <!-- Nama Produk -->
+                        <div class="mb-3">
+                            <label for="lnamaProduk" class="form-label">Nama Produk</label>
+                            <input type="text" class="form-control" name="fnamaProduk" id="fnamaProduk">
+                        </div>
+                        <!-- SKU -->
+                        <div class="mb-3">
+                            <label for="lSKU" class="form-label">Nomor SKU</label>
+                            <input type="text" class="form-control" name="fSKU" id="fSKU">
+                        </div>
+                        <!-- Stok -->
+                        <div class="mb-3">
+                            <label for="lStok" class="form-label">Stok</label>
+                            <input type="number" class="form-control" name="fStok" id="fStok">
+                        </div>
+                        <!-- Alamat -->
+                        <div class="mb-3">
+                            <label for="lHargaSatuan" class="form-label">Harga Satuan</label>
+                            <input type="text" class="form-control" name="fHargaSatuan" id="fHargaSatuan">
+                        </div>
+                        <!-- Foto Produk -->
+                        <div class="mb-3">
+                            <label for="lImageProduk" class="form-label">File Foto</label>
+                            <input type="file" class="form-control" id="fImageProduk">
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="button" name="btn-update-product" id="btn-update-product"
                                 class="btn btn-primary">Simpan</button>
                         </div>
                     </form>
