@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php
+$layout = dirname(__FILE__) . "/layout/";
+session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,17 +25,17 @@
 </head>
 
 <body>
-    <?php include_once "navbar.php"; ?>
+    <?php include_once $layout . "navbar.php"; ?>
 
-    <?php include_once "header.php"; ?>
+    <?php include_once $layout . "header.php"; ?>
 
-    <?php include_once "content.php"; ?>
+    <?php include_once $layout . "content.php"; ?>
 
-    <?php include_once "footer.php"; ?>
+    <?php include_once $layout . "footer.php"; ?>
 
-    <?php include_once "modal_registrasi.php"; ?>
+    <?php include_once $layout . "modal_registrasi.php"; ?>
 
-    <?php include_once "modal_login.php"; ?>
+    <?php include_once $layout . "modal_login.php"; ?>
 
     <!-- Jquery Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
