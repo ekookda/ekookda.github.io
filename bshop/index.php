@@ -1,5 +1,6 @@
 <?php
 $layout = dirname(__FILE__) . "/layout/";
+include_once 'helper/function.php';
 session_start();
 ?>
 
