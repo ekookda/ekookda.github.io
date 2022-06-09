@@ -15,7 +15,7 @@ function login($db)
 
 function getAllCustomers($db)
 {
-    $sql = "SELECT * FROM pelanggan ORDER BY pelanggan_id DESC";
+    $sql = "SELECT pelanggan_id, nama, tanggal_lahir, email, alamat FROM pelanggan ORDER BY pelanggan_id DESC";
     $result = $db->query($sql);
     $result_array = $result->fetch_all(MYSQLI_ASSOC);
     echo json_encode(['data' => $result_array]);
