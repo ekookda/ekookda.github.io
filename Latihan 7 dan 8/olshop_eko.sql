@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jun 07, 2022 at 10:45 PM
--- Server version: 5.7.24
--- PHP Version: 7.4.16
+-- Host: localhost
+-- Generation Time: Jun 09, 2022 at 04:03 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -56,13 +56,13 @@ INSERT INTO `detail_transaksi` (`detail_id`, `kode_transaksi`, `sku`, `item`, `h
 --
 
 CREATE TABLE `pelanggan` (
-  `pelanggan_id` varchar(16) NOT NULL,
-  `nama` varchar(20) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  `tanggal_lahir` date DEFAULT NULL,
-  `alamat` varchar(100) DEFAULT NULL,
-  `kodepos` varchar(16) DEFAULT NULL
+  `pelanggan_id` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `tanggal_lahir` date NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `kodepos` varchar(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -70,11 +70,11 @@ CREATE TABLE `pelanggan` (
 --
 
 INSERT INTO `pelanggan` (`pelanggan_id`, `nama`, `email`, `password`, `tanggal_lahir`, `alamat`, `kodepos`) VALUES
-('1', 'Andi', 'andi@email.com', 'andi', '1971-02-19', 'Bandung', '1919'),
-('2', 'Asih', 'asih@email.com', 'asih', '1973-05-02', 'Padang', '1111'),
-('3', 'Budi', 'budi@email.com', 'budi', '1975-06-29', 'Padang', '1111'),
-('4', 'Ari', 'ari@email.com', 'ari', '1977-10-04', 'Pekanbaru', '1432'),
-('6', 'Hedey', 'hesdey@email.com', 'hesdey', '1988-12-16', 'Depok', '1567');
+(1, 'Andi', 'andi@email.com', 'andi', '1971-02-19', 'Bandung', '1919'),
+(2, 'Asih', 'asih@email.com', 'asih', '1973-05-02', 'Padang', '1111'),
+(3, 'Budi', 'budi@email.com', 'budi', '1975-06-29', 'Padang', '1111'),
+(4, 'Ari', 'ari@email.com', 'ari', '1977-10-04', 'Pekanbaru', '1432'),
+(6, 'Hesdey', 'hesdey@email.com', 'hesdey', '1988-12-16', 'Depok', '1567');
 
 -- --------------------------------------------------------
 
@@ -84,11 +84,11 @@ INSERT INTO `pelanggan` (`pelanggan_id`, `nama`, `email`, `password`, `tanggal_l
 
 CREATE TABLE `produk` (
   `produk_id` int(11) NOT NULL,
-  `nama` varchar(50) DEFAULT NULL,
-  `sku` varchar(16) DEFAULT NULL,
-  `stok` int(11) DEFAULT NULL,
-  `harga_satuan` int(11) DEFAULT NULL,
-  `img_url` varchar(100) DEFAULT NULL
+  `nama` varchar(100) NOT NULL,
+  `sku` varchar(50) NOT NULL,
+  `stok` int(11) NOT NULL,
+  `harga_satuan` decimal(7,0) NOT NULL,
+  `img_url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -96,13 +96,11 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`produk_id`, `nama`, `sku`, `stok`, `harga_satuan`, `img_url`) VALUES
-(1, 'Produk Satu', 'PRD023', 10, 1000, '../assets/image/product/prd023'),
-(2, 'Produk Dua', 'PRD024', 15, 3000, '../assets/image/product/prd024'),
-(3, 'Produk Tiga', 'PRD025', 100, 11000, '../assets/image/product/prd025'),
-(4, 'Produk Empat', 'PRD026', 5, 45000, '../assets/image/product/prd026'),
-(5, 'Produk Lima', 'PRD027', 50, 7000, '../assets/image/product/prd027'),
-(6, 'Produk Tujuh', 'PRD029', 231, 50000, '/assets/img/mouse.jpg'),
-(7, 'Produk Enam', 'PRD028', 0, 500, '../assets/image/product/prd028');
+(1, 'Produk Satu', 'PRD023', 10, '1000', '../assets/image/product/prd023'),
+(2, 'Produk Dua', 'PRD024', 15, '3000', '../assets/image/product/prd024'),
+(3, 'Produk Tiga', 'PRD025', 100, '11000', '../assets/image/product/prd025'),
+(4, 'Produk Empat', 'PRD026', 5, '45000', '../assets/image/product/prd026'),
+(5, 'Produk Lima', 'PRD027', 50, '7000', '../assets/image/product/prd027');
 
 -- --------------------------------------------------------
 
@@ -164,13 +162,19 @@ ALTER TABLE `transaksi`
 -- AUTO_INCREMENT for table `detail_transaksi`
 --
 ALTER TABLE `detail_transaksi`
-  MODIFY `detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `pelanggan`
+--
+ALTER TABLE `pelanggan`
+  MODIFY `pelanggan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `produk_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `produk_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
