@@ -8,6 +8,10 @@ a.hover:hover {
     color: #ffc107 !important;
 }
 
+#btnLogin:hover {
+    color: #000000 !important;
+}
+
 #wishlist0,
 #wishlist1,
 #wishlist2,

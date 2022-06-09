@@ -43,10 +43,10 @@
                         </div>
                     </div> <!-- end .dropdown-menu -->
                 </li> <!-- end .nav-item dropdown -->
-                <li class="nav-item"><a class="nav-link btn btn-outline-warning mx-sm-2 px-4 text-warning" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">MASUK</a>
+                <li class="nav-item"><a class="nav-link btn btn-outline-warning mx-sm-2 px-4 text-warning" href="#" id="btnLogin" data-bs-toggle="modal" data-bs-target="#loginModal">MASUK</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-warning mx-sm-2 px-4 text-dark" href="#" data-bs-toggle="modal" data-bs-target="#registrasiModal">DAFTAR</a>
+                    <a class="nav-link btn btn-warning mx-sm-2 px-4 text-dark" href="#" data-bs-toggle="modal" id="btnRegister" data-bs-target="#registrasiModal">DAFTAR</a>
                 </li>
             </ul> <!-- end .navbar-nav -->
         </div> <!-- End Navbar Menu -->

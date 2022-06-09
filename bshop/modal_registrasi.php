@@ -11,26 +11,26 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="" method="post" autocomplete="off" id="formRegistrasi">
+                <form action="function.php?f=register" method="post" autocomplete="off" id="formRegistrasi">
                     <div class="mb-3">
                         <!-- Nama -->
                         <label for="lname" class="form-label">Nama Lengkap</label>
                         <input type="text" class="form-control" name="fname" id="fname">
                     </div>
                     <div class="mb-3">
-                        <!-- Password -->
-                        <label for="lpass" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="fpass" id="fpass">
+                        <!-- Password 1 -->
+                        <label for="lpass1" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="fpass1" id="fpass1">
+                    </div>
+                    <div class="mb-3">
+                        <!-- Password 2 -->
+                        <label for="lpass2" class="form-label">Masukkan Password Lagi</label>
+                        <input type="password" class="form-control" name="fpass2" id="fpass2">
                     </div>
                     <div class="mb-3">
                         <!-- Tanggal Lahir -->
                         <label for="lTglLahir" class="form-label">Tanggal Lahir</label>
                         <input type="text" class="form-control" name="fTglLahir" id="fTglLahir">
-                    </div>
-                    <div class="mb-3">
-                        <!-- Umur -->
-                        <label for="lumur" class="form-label">Umur</label>
-                        <input type="number" class="form-control" name="fumur" id="fumur">
                     </div>
                     <div class="mb-3">
                         <!-- Email -->
@@ -48,7 +48,7 @@
                         <input type="text" class="form-control" name="fkodepos" id="fkodepos">
                     </div>
                     <div class="d-grid gap-2">
-                        <button type="button" name="btnRegistrasi" id="btnRegistrasi" class="btn btn-primary">Daftar
+                        <button type="submit" name="btnRegistrasi" id="btnRegistrasi" class="btn btn-primary">Daftar
                             Sekarang</button>
                     </div>
                 </form>

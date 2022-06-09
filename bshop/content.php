@@ -115,7 +115,6 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody id="cartTable"></tbody>
                 <tfoot>
                     <tr class="text-center">
                         <th>No</th>
@@ -137,6 +136,7 @@
                         <td id="totalPrice" colspan="3"></td>
                     </tr>
                 </tfoot>
+                <tbody id="cartTable"></tbody>
             </table>
             <button type="button" onclick="emptyCart()" id="emptyCart" class="btn btn-outline-danger mb-3">Empty
                 Cart</button>
