@@ -2,7 +2,7 @@
     <div class="container">
         <!-- Navbar Brand / Logo -->
         <a class="navbar-brand" href="#">
-            <img src="<?= dirname("../images/"); ?>/images/logo.png" alt="Logo B-Shop" style="width:40px;" class="rounded-pill d-inline-block align-text-middle">B-Shop
+            <img src="<?= base_url(); ?>/images/logo.png" alt="Logo B-Shop" style="width:40px;" class="rounded-pill d-inline-block align-text-middle">B-Shop
         </a>
         <!-- Navbar Burger Menu / Responsive -->
         <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
