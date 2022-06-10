@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>BS Shop - <?= ucwords($_GET['f']); ?></title>
+    <title>BS Shop - <?= isset($_GET['f']) ? ucwords($_GET['f']) : "Beranda"; ?></title>
 
     <!-- Custom fonts for this template-->
     <link href="../src/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

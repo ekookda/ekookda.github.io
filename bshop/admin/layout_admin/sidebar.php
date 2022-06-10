@@ -22,14 +22,14 @@
 
     <!-- Nav Item - Customers -->
     <li class="nav-item">
-        <a class="nav-link" href="customers.php?f=getAllCustomers">
+        <a class="nav-link" href="customers.php">
             <i class="fas fa-fw fa-users"></i>
             <span>Customers</span></a>
     </li>
 
     <!-- Nav Item - Products -->
     <li class="nav-item">
-        <a class="nav-link" href="products.php?f=getAllProducts">
+        <a class="nav-link" href="products.php">
             <i class="fab fa-product-hunt"></i>
             <span>Products</span></a>
     </li>
