@@ -12,8 +12,8 @@ if ($url == 'login') {
     signout($db);
     // echo 'signout';
 } else {
-    echo 'restarting...';
-    // header('Location: login.php', true, 301);
+    // echo 'restarting...';
+    header('Location: login.php', true, 301);
 }
 
 //function login
