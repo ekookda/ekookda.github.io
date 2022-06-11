@@ -1,5 +1,5 @@
 <?php
-include_once '../connection.php';
+include_once dirname(__DIR__, 1) . '/connection.php';
 
 $url = isset($_GET['f']) ? $_GET['f'] : "";
 
