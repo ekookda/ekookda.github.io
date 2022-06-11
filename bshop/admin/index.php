@@ -1,15 +1,41 @@
 <?php
 session_start();
+if (isset($_SESSION['is_logged_in'])) {
+    header('Location: index.php', true, 301);
+}
 include 'layout_admin/head.php';
+?>
+<style>
+    .toast-container {
+        position: fixed;
+        right: 25px;
+        top: 85px;
+        z-index: 11;
+    }
+
+    .toast:not(.showing):not(.show) {
+        display: none !important;
+    }
+</style>
+<?php
 include 'layout_admin/sidebar.php';
 ?>
 
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
+
     <!-- Main Content -->
     <div id="content">
 
         <?php include 'layout_admin/topbar.php'; ?>
+
+        <!-- Toast -->
+        <div class="toast-container">
+            <div class="toast d-flex align-items-center text-white bg-primary" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-body"></div>
+                <button type="button" class="btn-close ms-auto me-2" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
@@ -123,19 +149,10 @@ include 'layout_admin/sidebar.php';
 
     <?php include 'layout_admin/footer.php'; ?>
 
-    <!-- Jquery Core Javascript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Bootstrap core JavaScript-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.5/umd/popper.min.js" integrity="sha512-8cU710tp3iH9RniUh6fq5zJsGnjLzOWLWdZqBMLtqaoZUA6AWIE34lwMB3ipUNiTBP5jEZKY95SfbNnQ8cCKvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.4/js/sb-admin-2.min.js" integrity="sha512-+QnjQxxaOpoJ+AAeNgvVatHiUWEDbvHja9l46BHhmzvP0blLTXC4LsvwDVeNhGgqqGQYBQLFhdKFyjzPX6HGmw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <script>
         $(document).ready(function() {
-
+            $('.toast-body').text('data berhasil ditambahkan');
+            $('.toast').toast('show');
         });
     </script>
 
