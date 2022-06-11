@@ -57,14 +57,9 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="card-footer py-3 border-0">
-                            <div class="text-center">
-                                Don't have an account? <a href="register.html" class="text-dark">Create One</a>
-                            </div>
-                        </div>
                     </div>
                     <div class="text-center mt-5 text-muted">
-                        Copyright &copy; 2017-2021 &mdash; BShop
+                        Copyright &copy; 2017- <?= date('Y'); ?> &mdash; BShop
                     </div>
                 </div>
             </div>
