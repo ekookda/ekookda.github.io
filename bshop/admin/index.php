@@ -160,10 +160,10 @@ include 'layout_admin/sidebar.php';
                 $.session.remove('success');
             }
 
-            $('#logout').click(function() {
-                $.session.set('messages', 'Logout berhasil!');
-                window.location.href = 'logout.php';
-            });
+            // $('#logout').click(function() {
+            //     $.session.set('messages', 'Logout berhasil!');
+            //     window.location.href = 'logout.php';
+            // });
         });
     </script>
 
