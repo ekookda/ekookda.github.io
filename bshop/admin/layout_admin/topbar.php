@@ -106,7 +106,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-primary" id="logout">Logout</button>
+                <a href="query_login.php?f=signout" class="btn btn-primary" id="btn_logout">Logout</a>
             </div>
         </div>
     </div>
