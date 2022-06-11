@@ -7,8 +7,13 @@ $url = isset($_GET['f']) ? $_GET['f'] : "";
 
 if ($url == 'login') {
     login($db);
+    // echo 'login';
+} else if ($url == 'signout') {
+    signout($db);
+    // echo 'signout';
 } else {
-    header('Location: login.php', true, 301);
+    echo 'restarting...';
+    // header('Location: login.php', true, 301);
 }
 
 //function login
@@ -39,4 +44,11 @@ function login($db)
     } else {
         echo json_encode(array('messages' => 'Login tidak berhasil. Data tidak ditemukan!'));
     }
+}
+
+function signout($db)
+{
+    session_unset();
+    session_destroy();
+    header('Location: login.php?f=login', true, 301);
 }
