@@ -17,21 +17,27 @@ function login($db)
 {
     $email = validasi_input($_POST['email']);
     $password = validasi_input($_POST['password']);
-    $sql = "SELECT * FROM admin WHERE username = '$email'";
+    $sql = "SELECT * FROM admin WHERE email = '$email'";
     $result = $db->query($sql);
+
     if ($result->num_rows > 0) {
         $result_array = $result->fetch_assoc();
         if (password_verify($password, $result_array['password'])) {
             // Simpan session untuk nama di dashboard dan check login
             $_SESSION['admin'] = $result_array['nama'];
             $_SESSION['is_logged_in'] = true;
-            echo json_encode(['data' => $result_array]);
-            // header('Location: ' . base_url() . 'admin/index.php', true, 301);
+            echo json_encode(
+                array(
+                    'data' => $result_array,
+                    'status' => 1
+                )
+            );
         } else {
-            header('Location: ' . base_url() . 'admin/login.php?f=login', true, 301);
+            echo json_encode(array('data' => 'Password salah!'));
+            // header('Location: ' . base_url() . 'admin/login.php?f=login', true, 301);
         }
     } else {
-        echo json_encode(['data' => 'Login tidak berhasil. Data tidak ditemukan!']);
+        echo json_encode(array('messages' => 'Login tidak berhasil. Data tidak ditemukan!'));
     }
 }
 
