@@ -7,8 +7,6 @@ $url = isset($_GET['f']) ? $_GET['f'] : "";
 
 if ($url == 'login') {
     login($db);
-} else if ($url == 'logout') {
-    logout($db);
 } else {
     header('Location: login.php', true, 301);
 }
