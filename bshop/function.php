@@ -23,3 +23,14 @@ if (!function_exists('base_url')) {
     }
 }
 $base_url = base_url();
+
+if (!function_exists($validasi_input)) {
+    // Fungsi untuk menvalidasi seluruh Input
+    function validasi_input($data)
+    {
+        $data = trim($data);     //
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+}
