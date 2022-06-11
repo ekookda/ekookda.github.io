@@ -1,10 +1,10 @@
 <?php
 session_start();
-if (isset($_SESSION['is_logged_in'])) {
-    header('Location: index.php', true, 301);
+if (isset($_SESSION['is_logged_in']) == false) {
+    header('Location: login.php', true, 301);
 }
-include 'layout_admin/head.php';
 ?>
+<?php include 'layout_admin/head.php'; ?>
 <style>
     .toast-container {
         position: fixed;
@@ -39,6 +39,7 @@ include 'layout_admin/sidebar.php';
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
+            <?php print_r($_SESSION); ?>
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
@@ -149,10 +150,20 @@ include 'layout_admin/sidebar.php';
 
     <?php include 'layout_admin/footer.php'; ?>
 
+    <script src="../src/js/jquery.session.js"></script>
+
     <script>
         $(document).ready(function() {
-            $('.toast-body').text('data berhasil ditambahkan');
-            $('.toast').toast('show');
+            if ($.session.get('success') != null) {
+                $('.toast-body').html($.session.get('success'));
+                $('.toast').toast('show');
+                $.session.remove('success');
+            }
+
+            $('#logout').click(function() {
+                $.session.set('messages', 'Logout berhasil!');
+                window.location.href = 'logout.php';
+            });
         });
     </script>
 
