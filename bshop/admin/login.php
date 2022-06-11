@@ -1,5 +1,3 @@
-<?php session_start(); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +29,8 @@
         <div class="container h-100">
             <!-- Toast -->
             <div class="toast-container">
-                <div class="toast d-flex align-items-center text-white" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast d-flex align-items-center text-white bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-body"></div>
                     <button type="button" class="btn-close ms-auto me-2" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
             </div>
@@ -90,6 +89,7 @@
     <!-- Bootstrap core JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.5/umd/popper.min.js" integrity="sha512-8cU710tp3iH9RniUh6fq5zJsGnjLzOWLWdZqBMLtqaoZUA6AWIE34lwMB3ipUNiTBP5jEZKY95SfbNnQ8cCKvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../src/js/jquery.session.js"></script>
     <script>
         // Login
         (function() {
@@ -113,6 +113,12 @@
         })()
 
         $(document).ready(function() {
+            if ($.session.get('messages') != null) {
+                $('.toast-body').html($.session.get('messages'));
+                $('.toast').toast('show');
+                $.session.remove('messages');
+            }
+
             // Login
             $('#form_login').submit(function(e) {
                 let url = $(this).attr('action');
@@ -122,12 +128,14 @@
                     data: $('#form_login').serialize(),
                     success: function(response) {
                         let d = $.parseJSON(response);
-
-                        // console.log(d.status);
+                        // console.log(d.session.name);
                         if (d.status == 1) {
                             $('.toast').removeClass('bg-danger');
-                            $('.toast').addClass('bg-success').html(`<div class="toast-body">Login Berhasil!</div>`);
-                            $('.toast').toast('show');
+                            $('.toast').addClass('bg-success')
+                                .html(`<div class="toast-body">Login Berhasil!</div>`)
+                                .toast('show');
+                            $.session.set('success', 'Selamat datang di halaman beranda');
+                            $.session.set('status', 1);
                             window.setTimeout(
                                 function() {
                                     window.location = '/ppkdju/ppkdju.github.io/bshop/admin';
@@ -135,7 +143,9 @@
                                 3000
                             );
                         } else {
-                            $('.toast').addClass('bg-danger').html('<div class="toast-body">Login Gagal!</div>').toast('show');
+                            $('.toast').addClass('bg-danger')
+                                .html('<div class="toast-body">Login Gagal!</div>')
+                                .toast('show');
                         }
                     },
                     error: function(data) {
