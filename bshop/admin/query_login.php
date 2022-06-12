@@ -13,7 +13,7 @@ if ($url == 'login') {
     // echo 'signout';
 } else {
     // echo 'restarting...';
-    header('Location: login.php', true, 301);
+    header('Location: login.php');
 }
 
 //function login
@@ -49,5 +49,5 @@ function signout($db)
 {
     session_unset();
     session_destroy();
-    header('Location: login.php?f=login', true, 301);
+    header('Location: login.php?f=login');
 }
