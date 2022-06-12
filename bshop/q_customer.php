@@ -11,7 +11,7 @@ if ($r == 'login') {
 } elseif ($r == 'register') {
     register($db);
 } else {
-    header("location: index.php", true, 301);
+    header("location: index.php");
 }
 
 function register($db)
@@ -38,7 +38,7 @@ function register($db)
         if ($db->query($query) === TRUE) {
             $data = array(
                 'status' => 1,
-                'message' => 'Register berhasil!'
+                'message' => 'Register berhasil. Silahkan login!'
             );
             echo json_encode($data);
         } else {
@@ -54,7 +54,7 @@ function login($db)
 {
     $email = validasi_input($_POST['email']);
     $password = validasi_input($_POST['password']);
-    $sql = "SELECT * FROM admin WHERE email = '$email'";
+    $sql = "SELECT * FROM pelanggan WHERE email = '$email'";
     $result = $db->query($sql);
 
     if ($result->num_rows > 0) {
@@ -72,7 +72,7 @@ function login($db)
             );
         } else {
             echo json_encode(array('messages' => 'Password salah!'));
-            // header('Location: ' . base_url() . 'admin/login.php?f=login', true, 301);
+            // header('Location: ' . base_url() . 'admin/login.php?f=login');
         }
     } else {
         echo json_encode(array('messages' => 'Login tidak berhasil. Data tidak ditemukan!'));
@@ -83,5 +83,5 @@ function logout($db)
 {
     session_unset();
     session_destroy();
-    header('Location: index.php', true, 301);
+    header('Location: index.php');
 }
