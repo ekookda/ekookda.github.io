@@ -208,10 +208,4 @@ $(document).ready(function () {
 			"ui-autocomplete": "autoCompleteList"
 		}
 	});
-
-	// Tampilkan Form Tambah Data
-	$('#btnRegister').click(function (reload) {
-		// reset form
-		$('#formRegistrasi')[0].reset();
-	});
 });
