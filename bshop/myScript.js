@@ -214,36 +214,4 @@ $(document).ready(function () {
 		// reset form
 		$('#formRegistrasi')[0].reset();
 	});
-
-	// Ketika form register di submit
-	$("#formRegistrasi").submit(function (e) {
-		let url = $(this).attr("action");
-		$.ajax({
-			type: $(this).attr("method"),
-			url: url,
-			data: $(this).serialize(),
-			success: function (res) {
-				$('#registrasiModal').modal('hide');
-				swal({
-					position: 'top-end',
-					icon: 'success',
-					title: 'Registrasi berhasil! Silahkan login.',
-					showConfirmButton: false,
-					allowEscapeKey: false,
-					allowOutsideClick: false,
-					// timer: 3000
-				});
-			},
-			error: function () {
-				swal({
-					position: 'top-end',
-					icon: 'error',
-					title: 'Data gagal disimpan!',
-					showConfirmButton: false,
-					timer: 3000
-				});
-			}
-		});
-		e.preventDefault();
-	});
 });
