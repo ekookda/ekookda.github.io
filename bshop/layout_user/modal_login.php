@@ -36,7 +36,7 @@
 <!-- End Form Login -->
 
 <!-- Modal Logout -->
-<div class="modal fade" id="modal-logout" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_logout" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -48,7 +48,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
-                <a href="q_customer.php?f=signout" class="btn btn-primary" id="btn_logout">Logout</a>
+                <a href="q_customer.php?f=logout" class="btn btn-primary" id="btn_logout">Logout</a>
             </div>
         </div>
     </div>
