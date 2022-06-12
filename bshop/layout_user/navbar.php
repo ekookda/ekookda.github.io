@@ -31,6 +31,7 @@
                         <span class="position-absolute top-0 start-100 translate-middle-x badge rounded-pill bg-danger">
                             0</span>
                     </button>
+                    <!-- Cart icon -->
                     <div class="dropdown-menu p-0" aria-labelledby="dropdownId">
                         <div class="card" style="width: 18rem;">
                             <img src="https://www.static-src.com/frontend/static/img/cart-empty.3e6fae9.svg" alt="Empty Cart" class="card-img-top">
@@ -43,11 +44,17 @@
                         </div>
                     </div> <!-- end .dropdown-menu -->
                 </li> <!-- end .nav-item dropdown -->
-                <li class="nav-item"><a class="nav-link btn btn-outline-warning mx-sm-2 px-4 text-warning" href="#" id="btnLogin" data-bs-toggle="modal" data-bs-target="#loginModal">MASUK</a>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-warning mx-sm-2 px-4 text-warning" href="#" id="btnLogin" data-bs-toggle="modal" data-bs-target="#loginModal">MASUK</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link btn btn-warning mx-sm-2 px-4 text-dark" href="#" data-bs-toggle="modal" id="btnRegister" data-bs-target="#registrasiModal">DAFTAR</a>
                 </li>
+                <!-- nav - logout -->
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-warning mx-sm-2 px-4 text-warning" href="#" id="btnLogout" data-bs-toggle="modal" data-bs-target="#modal_logout" style="display:none;">LOGOUT</a>
+                </li>
+                <!-- end nav - logout -->
             </ul> <!-- end .navbar-nav -->
         </div> <!-- End Navbar Menu -->
     </div> <!-- end container -->
