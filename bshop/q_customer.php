@@ -1,38 +1,87 @@
 <?php
 include_once 'connection.php';
+include_once 'function.php';
 
-$url = $_GET['f'];
+$r = isset($_GET['f']) ? $_GET['f'] : '';
 
-if ($url == 'register') {
-    registerCustomer($db);
-} else if ($url == 'update') {
-    # code...
-} else if ($url == 'delete') {
-    # code...
-} else if ($url == 'getAllCustomer') {
-    # code
-} else if ($url == 'getCustomerById') {
-    # code...
+if ($r == 'login') {
+    login($db);
+} else if ($r == 'logout') {
+    logout($db);
+} elseif ($r == 'register') {
+    register($db);
 } else {
     header("location: index.php", true, 301);
-    exit();
 }
 
-// function register customer
-function registerCustomer($db)
+function register($db)
 {
-    $query = "INSERT INTO pelanggan (nama, email, password, tanggal_lahir, alamat, kodepos) 
+    $nama = validasi_input($_POST['fname']);
+    $email = validasi_input($_POST['femail']);
+    $fpass1 = validasi_input($_POST['fpass1']);
+    $fpass2 = validasi_input($_POST['fpass2']);
+    $tgl_lahir = validasi_input($_POST['fTglLahir']);
+    $alamat = validasi_input($_POST['falamat']);
+    $kodepos = validasi_input($_POST['fkodepos']);
+
+    if ($fpass1 == $fpass2) {
+        $password = password_hash($fpass1, PASSWORD_DEFAULT);
+        $query = "INSERT INTO pelanggan (nama, email, password, tanggal_lahir, alamat, kodepos) 
                 VALUES (
-                    '" . $_POST['fname'] . "',
-                    '" . $_POST['femail'] . "',
-                    '" . $_POST['fpass1'] . "',
-                    '" . $_POST['fTglLahir'] . "',
-                    '" . $_POST['falamat'] . "',
-                    '" . $_POST['fkodepos'] . "'
+                    '" . $nama . "',
+                    '" . $email . "',
+                    '" . $password . "',
+                    '" . $tgl_lahir . "',
+                    '" . $alamat . "',
+                    '" . $kodepos . "'
                 )";
-    if ($db->query($query) === TRUE) {
-        echo "Data berhasil ditambahkan";
+        if ($db->query($query) === TRUE) {
+            $data = array(
+                'status' => 1,
+                'message' => 'Register berhasil!'
+            );
+            echo json_encode($data);
+        } else {
+            echo json_encode(array('status' => 0, 'message' => "Error: " . $query . "<br>" . $db->error));
+        }
     } else {
-        echo "Error: " . $query . "<br>" . $db->error;
+        echo json_encode(array('status' => 0, 'message' => 'Password tidak sama'));
     }
+}
+
+//function login
+function login($db)
+{
+    $email = validasi_input($_POST['email']);
+    $password = validasi_input($_POST['password']);
+    $sql = "SELECT * FROM admin WHERE email = '$email'";
+    $result = $db->query($sql);
+
+    if ($result->num_rows > 0) {
+        $result_array = $result->fetch_assoc();
+        if (password_verify($password, $result_array['password'])) {
+            // Simpan session untuk nama di dashboard dan check login
+            $_SESSION['name'] = $result_array['nama'];
+            $_SESSION['is_logged_in'] = true;
+            echo json_encode(
+                array(
+                    'data' => $result_array,
+                    'status' => 1,
+                    'session' => $_SESSION
+                )
+            );
+        } else {
+            echo json_encode(array('messages' => 'Password salah!'));
+            // header('Location: ' . base_url() . 'admin/login.php?f=login', true, 301);
+        }
+    } else {
+        echo json_encode(array('messages' => 'Login tidak berhasil. Data tidak ditemukan!'));
+    }
+}
+
+function logout($db)
+{
+    session_unset();
+    session_destroy();
+    header('Location: index.php', true, 301);
 }
