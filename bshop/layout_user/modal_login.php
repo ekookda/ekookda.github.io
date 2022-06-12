@@ -1,5 +1,5 @@
 <!-- Modal Form Login -->
-<div class="modal" id="loginModal">
+<div class="modal" id="modal-login">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -34,3 +34,23 @@
     </div>
 </div> <!-- End #modalFormLogin -->
 <!-- End Form Login -->
+
+<!-- Modal Logout -->
+<div class="modal fade" id="modal-logout" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logoutModalLabel">Yakin akan keluar?</h5>
+                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                <a href="q_customer.php?f=signout" class="btn btn-primary" id="btn_logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Modal Logout -->
