@@ -1,5 +1,6 @@
 <?php
-session_start();
+if (!isset($_SESSION)) session_start();
+
 include_once 'function.php';
 $layout = dirname(__FILE__) . "/layout_user/";
 ?>
@@ -107,13 +108,13 @@ $layout = dirname(__FILE__) . "/layout_user/";
                         if (d.status == 1) {
                             $('#modal_login').modal('hide');
                             alert(d.message);
-                            console.log(d);
-                            // window.setTimeout(
-                            //     function() {
-                            //         location.reload(true);
-                            //     },
-                            //     1000
-                            // );
+                            // console.log(d);
+                            window.setTimeout(
+                                function() {
+                                    location.reload(true);
+                                },
+                                1000
+                            );
                         } else {
                             alert(d.message);
                         }
