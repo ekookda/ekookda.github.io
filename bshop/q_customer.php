@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once 'connection.php';
 include_once 'function.php';
 
@@ -61,8 +62,11 @@ function login($db)
         $result_array = $result->fetch_assoc();
         if (password_verify($password, $result_array['password'])) {
             // Simpan session untuk nama di dashboard dan check login
-            $_SESSION['name'] = $result_array['nama'];
-            $_SESSION['is_logged_in'] = true;
+            $_SESSION = array(
+                'name' => $result_array['nama'],
+                'email' => $result_array['email'],
+                'is_logged_in' => true
+            );
             echo json_encode(
                 array(
                     'data' => $result_array,
