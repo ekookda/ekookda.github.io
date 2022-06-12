@@ -1,6 +1,6 @@
 <?php
-include_once 'function.php';
 session_start();
+include_once 'function.php';
 $layout = dirname(__FILE__) . "/layout_user/";
 ?>
 
@@ -47,13 +47,11 @@ $layout = dirname(__FILE__) . "/layout_user/";
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Jquery Zoom Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js" integrity="sha512-m5kAjE5cCBN5pwlVFi4ABsZgnLuKPEx0fOnzaH5v64Zi3wKnhesNUYq4yKmHQyTa3gmkR6YeSKW1S+siMvgWtQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Sweet Alert JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="myScript.js"></script>
     <script>
         $(document).ready(function() {
-
-            if (<?php $_SESSION['is_logged_in']; ?>) {
+            // Cek jumlah session
+            if (<?php echo sizeof($_SESSION); ?> != 0) {
                 $('#btnLogin').hide();
                 $('#btnRegister').hide();
                 $('#btnLogout').show();
