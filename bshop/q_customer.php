@@ -68,7 +68,7 @@ function login($db)
                     'data' => $result_array,
                     'session' => $_SESSION,
                     'status' => 1,
-                    'message' => 'Login berhasil'
+                    'message' => 'Login berhasil!'
                 )
             );
         } else {
