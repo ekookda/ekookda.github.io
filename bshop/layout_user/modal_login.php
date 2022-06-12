@@ -15,13 +15,13 @@
                 <form action="q_customer.php?f=login" id="form_login" method="post" autocomplete="off">
                     <div class="mb-4">
                         <!-- Username / Email -->
-                        <label for="username" class="form-label">Username / Email</label>
-                        <input type="text" class="form-control" name="username" id="username">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" id="email">
                     </div>
                     <div class="mb-4">
                         <!-- Password -->
                         <label for="password" class="form-label">Password</label>
-                        <input type="text" class="form-control" name="password" id="password">
+                        <input type="password" class="form-control" name="password" id="password">
                     </div>
 
                     <div class="d-grid gap-2">
