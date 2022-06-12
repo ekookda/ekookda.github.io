@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['is_logged_in']) == false) {
-    header('Location: login.php', true, 301);
+    header('Location: login.php');
 }
 ?>
 <?php include 'layout_admin/head.php'; ?>
