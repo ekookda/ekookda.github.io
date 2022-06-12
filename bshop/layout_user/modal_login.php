@@ -1,19 +1,18 @@
 <!-- Modal Form Login -->
-<div class="modal" id="modal-login">
+<div class="modal fade" id="modal_login" tabindex="-1" aria-labelledby="modal_login_label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">
+                <h4 class="modal-title" id="modal_login_label">
                     <i class="fas fa-user"></i> Login
                 </h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="#">
+                <form action="q_customer.php?f=login" id="form_login">
                     <div class="mb-4">
                         <!-- Username / Email -->
                         <label for="username" class="form-label">Username / Email</label>
@@ -26,7 +25,7 @@
                     </div>
 
                     <div class="d-grid gap-2">
-                        <button type="button" name="btn-login" id="btn-login" class="btn btn-primary"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+                        <button type="submit" id="submit_login" class="btn btn-primary"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
                     </div>
                 </form>
             </div>
