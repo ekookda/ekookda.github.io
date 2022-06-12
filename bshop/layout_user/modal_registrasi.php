@@ -11,7 +11,7 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="<?= base_url() . 'helper/core.php?f=register'; ?>" method="post" autocomplete="off" id="formRegistrasi">
+                <form action="q_customer.php?f=register" method="post" autocomplete="off" id="formRegistrasi">
                     <div class="mb-3">
                         <!-- Nama -->
                         <label for="lname" class="form-label">Nama Lengkap</label>
