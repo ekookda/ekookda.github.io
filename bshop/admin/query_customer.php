@@ -1,5 +1,6 @@
 <?php
 include_once dirname(__DIR__, 1) . '/connection.php';
+include_once dirname(__DIR__, 1) . '/function.php';
 
 $url = isset($_GET['f']) ? $_GET['f'] : "";
 
@@ -15,11 +16,11 @@ if ($url == 'updateCustomer') {
 
 function updateCustomer($db)
 {
-    $id = $_POST['pelanggan_id'];
-    $nama = $_POST['fname'];
-    $email = $_POST['femail'];
-    $tanggal_lahir = $_POST['fTglLahir'];
-    $alamat = $_POST['falamat'];
+    $id = validasi_input($_POST['pelanggan_id']);
+    $nama = validasi_input($_POST['fname']);
+    $email = validasi_input($_POST['femail']);
+    $tanggal_lahir = validasi_input($_POST['fTglLahir']);
+    $alamat = validasi_input($_POST['falamat']);
 
     $sql = "UPDATE pelanggan SET nama='$nama', email='$email', tanggal_lahir='$tanggal_lahir', alamat='$alamat' WHERE pelanggan_id='$id'";
 
