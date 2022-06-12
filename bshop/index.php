@@ -97,7 +97,34 @@ $layout = dirname(__FILE__) . "/layout_user/";
             });
 
             // submit login
-
+            $('#form_login').submit(function(e) {
+                $.ajax({
+                    type: $(this).attr("method"),
+                    url: $(this).attr("action"),
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        let d = $.parseJSON(response);
+                        if (d.status == 1) {
+                            $('#modal_login').modal('hide');
+                            alert(d.message);
+                            console.log(d);
+                            // window.setTimeout(
+                            //     function() {
+                            //         location.reload(true);
+                            //     },
+                            //     1000
+                            // );
+                        } else {
+                            alert(d.message);
+                        }
+                    },
+                    error: function(requestObject, error, errorThrown) {
+                        alert(error);
+                        console.log(errorThrown);
+                    }
+                });
+                e.preventDefault();
+            });
         });
     </script>
 </body>
