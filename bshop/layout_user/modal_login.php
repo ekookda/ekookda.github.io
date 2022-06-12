@@ -12,7 +12,7 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="q_customer.php?f=login" id="form_login">
+                <form action="q_customer.php?f=login" id="form_login" method="post" autocomplete="off">
                     <div class="mb-4">
                         <!-- Username / Email -->
                         <label for="username" class="form-label">Username / Email</label>
