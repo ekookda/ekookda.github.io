@@ -52,6 +52,17 @@ $layout = dirname(__FILE__) . "/layout_user/";
     <script src="myScript.js"></script>
     <script>
         $(document).ready(function() {
+
+            if (<?php $_SESSION['is_logged_in']; ?>) {
+                $('#btnLogin').hide();
+                $('#btnRegister').hide();
+                $('#btnLogout').show();
+            } else {
+                $('#btnLogin').show();
+                $('#btnRegister').show();
+                $('#btnLogout').hide();
+            }
+
             $('#btnRegister').click(function(reload) {
                 // reset form
                 $('#formRegistrasi')[0].reset();
@@ -86,6 +97,9 @@ $layout = dirname(__FILE__) . "/layout_user/";
                 });
                 e.preventDefault();
             });
+
+            // submit login
+
         });
     </script>
 </body>
