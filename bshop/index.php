@@ -50,6 +50,44 @@ $layout = dirname(__FILE__) . "/layout_user/";
     <!-- Sweet Alert JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="myScript.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#btnRegister').click(function(reload) {
+                // reset form
+                $('#formRegistrasi')[0].reset();
+            });
+
+            // submit register
+            $('#formRegistrasi').submit(function(e) {
+                let url = $(this).attr("action");
+                $.ajax({
+                    type: $(this).attr("method"),
+                    url: url,
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        let d = $.parseJSON(response);
+                        if (d.status == 1) {
+                            $('#registrasiModal').modal('hide');
+                            alert(d.message);
+                            window.setTimeout(
+                                function() {
+                                    location.reload(true);
+                                },
+                                1000
+                            );
+                        } else {
+                            alert(d.message);
+                        }
+                    },
+                    error: function(requestObject, error, errorThrown) {
+                        alert(error);
+                        console.log(errorThrown);
+                    }
+                });
+                e.preventDefault();
+            });
+        });
+    </script>
 </body>
 
 </html>
