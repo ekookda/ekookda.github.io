@@ -45,7 +45,7 @@
                     </div> <!-- end .dropdown-menu -->
                 </li> <!-- end .nav-item dropdown -->
                 <li class="nav-item">
-                    <a class="nav-link btn btn-outline-warning mx-sm-2 px-4 text-warning" href="#" id="btn_login" data-bs-toggle="modal" data-bs-target="#modal_login">MASUK</a>
+                    <a class="nav-link btn btn-outline-warning mx-sm-2 px-4 text-warning" href="#" id="btnLogin" data-bs-toggle="modal" data-bs-target="#modal_login">MASUK</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link btn btn-warning mx-sm-2 px-4 text-dark" href="#" data-bs-toggle="modal" id="btnRegister" data-bs-target="#registrasiModal">DAFTAR</a>
