@@ -39,7 +39,6 @@ function login($db)
             );
         } else {
             echo json_encode(array('messages' => 'Password salah!'));
-            // header('Location: ' . base_url() . 'admin/login.php?f=login', true, 301);
         }
     } else {
         echo json_encode(array('messages' => 'Login tidak berhasil. Data tidak ditemukan!'));
