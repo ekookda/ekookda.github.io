@@ -31,9 +31,8 @@ include 'layout_admin/sidebar.php';
 
         <!-- Toast -->
         <div class="toast-container">
-            <div class="toast d-flex align-items-center text-white bg-primary" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast d-flex align-items-center text-white" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-body"></div>
-                <button type="button" class="btn-close ms-auto me-2" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
 
@@ -155,15 +154,13 @@ include 'layout_admin/sidebar.php';
     <script>
         $(document).ready(function() {
             if ($.session.get('success') != null) {
-                $('.toast-body').html($.session.get('success'));
+                $('.toast-body')
+                    .addClass('bg-primary')
+                    .html($.session.get('success'));
                 $('.toast').toast('show');
                 $.session.remove('success');
             }
 
-            // $('#logout').click(function() {
-            //     $.session.set('messages', 'Logout berhasil!');
-            //     window.location.href = 'logout.php';
-            // });
         });
     </script>
 
