@@ -66,7 +66,6 @@ function login($db)
             echo json_encode(
                 array(
                     'data' => $result_array,
-                    'status' => 1,
                     'session' => $_SESSION
                 )
             );
