@@ -66,15 +66,16 @@ function login($db)
             echo json_encode(
                 array(
                     'data' => $result_array,
-                    'session' => $_SESSION
+                    'session' => $_SESSION,
+                    'status' => 1,
+                    'message' => 'Login berhasil'
                 )
             );
         } else {
-            echo json_encode(array('messages' => 'Password salah!'));
-            // header('Location: ' . base_url() . 'admin/login.php?f=login');
+            echo json_encode(array('message' => 'Password salah!'));
         }
     } else {
-        echo json_encode(array('messages' => 'Login tidak berhasil. Data tidak ditemukan!'));
+        echo json_encode(array('message' => 'Login tidak berhasil. Data tidak ditemukan!'));
     }
 }
 
