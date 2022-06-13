@@ -4,8 +4,8 @@ include_once dirname(__DIR__, 1) . '/function.php';
 
 $url = isset($_GET['f']) ? $_GET['f'] : "";
 
-if ($url == 'update_customer') {
-    update_customer($db);
+if ($url == 'update_product') {
+    update_product($db);
 } else if ($url == 'get_all_product') {
     get_all_product($db);
 } else if ($url == 'get_product_by_id') {
@@ -14,16 +14,16 @@ if ($url == 'update_customer') {
     delete_product($db);
 }
 
-function update_customer($db)
+function update_product($db)
 {
-    $id = validasi_input($_POST['produk_id']);
+    $produk_id = validasi_input($_POST['produk_id']);
     $nama_produk = validasi_input($_POST['fproductname']);
     $sku = validasi_input($_POST['fsku']);
-    $stok = validasi_input($_POST['fTglLahir']);
-    $harga_satuan = validasi_input($_POST['harga_satuan']);
-    $img_url = validasi_input($_POST['fimage']);
+    $stok = validasi_input($_POST['fstok']);
+    $harga_satuan = validasi_input($_POST['fharga_satuan']);
+    $img_url = validasi_input($_POST['fimage_url']);
 
-    $sql = "UPDATE produk SET nama='$nama_produk', sku='$sku', stok='$stok', img_url='$img_url' harga_satuan='$harga_satuan' WHERE produk_id='$id'";
+    $sql = "UPDATE produk SET nama='$nama_produk', sku='$sku', stok='$stok', harga_satuan='$harga_satuan', img_url='$img_url' WHERE produk_id='$produk_id'";
 
     if ($db->query($sql) === TRUE) {
         echo "Record has been updated successfully";
@@ -34,8 +34,8 @@ function update_customer($db)
 
 function delete_product($db)
 {
-    $id = $_POST['produk_id'];
-    $sql = "DELETE FROM produk WHERE produk_id='$id'";
+    $produk_id = $_POST['produk_id'];
+    $sql = "DELETE FROM produk WHERE produk_id='$produk_id'";
     if ($db->query($sql) === TRUE) {
         echo "Record deleted successfully";
     } else {
@@ -45,16 +45,16 @@ function delete_product($db)
 
 function get_all_product($db)
 {
-    $sql = "SELECT produk_id, nama, sku, harga_satuan, img_url FROM produk ORDER BY produk_id DESC";
+    $sql = "SELECT produk_id, nama, sku, stok, harga_satuan, img_url FROM produk ORDER BY produk_id DESC";
     $result = $db->query($sql);
-    $result_array = $result->fetch_all(MYSQLI_ASSOC);
+    $result_array = $result->fetch_assoc();
     echo json_encode(['data' => $result_array]);
 }
 
-function get_product_by_id($db, $id)
+function get_product_by_id($db, $produk_id)
 {
-    $sql = "SELECT produk_id, nama, sku, harga_satuan, img_url FROM produk WHERE produk_id = '$id'";
+    $sql = "SELECT produk_id, nama, sku, stok, harga_satuan, img_url FROM produk WHERE produk_id = '$produk_id'";
     $result = $db->query($sql);
-    $result_array = $result->fetch_all(MYSQLI_ASSOC);
+    $result_array = $result->fetch_assoc();
     echo json_encode($result_array[0]);
 }
