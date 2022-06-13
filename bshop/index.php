@@ -126,6 +126,47 @@ $layout = dirname(__FILE__) . "/layout_user/";
                 });
                 e.preventDefault();
             });
+
+            // Menampilkan gambar card
+            /*
+            $.ajax({
+                url: "q_product.php?f=get_product",
+                type: "POST",
+                success: function(result) {
+                    let product = $.parseJSON(result);
+                    for (let i = 0; i < product.length; i++) {
+                        $(".card-group").append('<div class="card"><a class="zoom" id="ex' + i + '"><img class="card-img-top" src="' + product[i].img_url + '" alt="Card image cap"></a><div class="card-body"><h6 class="card-title text-center productname">' + product[i].nama + '</h6><span class="badge rounded-pill positionl float-end px-3 m-2"><i class="far fa-heart" id="wishlist0"></i></span><p class="card-text p-0 m-0 sku">' + product[i].sku + '</p><p class="card-text p-0 mb-0 price">Rp ' + product[i].harga_satuan + ' </p><p class="card-text p-0 mb-0"><small class="text-muted">Stok ' + product[i].stok + ' item</small></p><input type="number" class="form-control quantity" name="fAddToCart" placeholder="Masukan jumlah item yang akan dibeli" min="1" aria-label="Add To Cart" aria-describedby="btn-addToCart" required><a href="#" class="btn btn-primary mt-1 btn-cart">Add to cart</a></div></div>');
+                    }
+                }
+            });
+            */
+
+            // Checkout
+            $('#btn_checkout').click(function(e) {
+                if (<?php echo sizeof($_SESSION); ?> == 0) {
+                    alert("Silahkan login terlebih dahulu");
+                    e.preventDefault();
+                } else {
+                    $.ajax({
+                        url: "q_transaction.php?f=add_transaction",
+                        type: "POST",
+                        success: function(result) {
+                            let d = $.parseJSON(result);
+                            if (d.status == 1) {
+                                alert(d.message);
+                                // window.setTimeout(
+                                //     function() {
+                                //         location.reload(true);
+                                //     },
+                                //     1000
+                                // );
+                            } else {
+                                alert(d.message);
+                            }
+                        }
+                    });
+                };
+            });
         });
     </script>
 </body>
