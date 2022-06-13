@@ -138,7 +138,8 @@
                             $.session.set('status', 1);
                             window.setTimeout(
                                 function() {
-                                    window.location = '/ppkdju/ppkdju.github.io/bshop/admin';
+                                    // redirect ke dashboard admin
+                                    window.location = '/ppkdju/bshop/admin/';
                                 },
                                 3000
                             );
