@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (!isset($_SESSION['is_logged_in'])) {
+    header('Location: login.php');
+}
 
 include 'layout_admin/head.php';
 
@@ -23,20 +26,20 @@ include 'layout_admin/sidebar.php';
                 </h1>
             </div>
 
-            <!-- DataTales Example -->
+            <!-- DataTables Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <!-- Button Add New Product modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDataProduk">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddProduct">
                         <i class="fas fa-plus-circle"></i>&nbsp;Add New Product
                     </button>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="table_product" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>No.</th>
+                                    <th></th>
                                     <th>Foto</th>
                                     <th>Nama Produk</th>
                                     <th>Nomor SKU</th>
@@ -47,7 +50,7 @@ include 'layout_admin/sidebar.php';
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>No.</th>
+                                    <th></th>
                                     <th>Foto</th>
                                     <th>Nama Produk</th>
                                     <th>Nomor SKU</th>
@@ -65,125 +68,264 @@ include 'layout_admin/sidebar.php';
     </div>
     <!-- End of Main Content -->
 
-    <!-- Footer -->
-    <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-                <span>Copyright &copy; 2022. Eko Okda. All Rights
-                    Reserved.</span>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Modal Form Add New Product -->
+    <div class="modal fade" id="modalAddProduct" tabindex="-1" aria-labelledby="labelAddProduk" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title text-center" id="titleAddDataProduk" aria-label="Close"><i class="fab fa-product-hunt"></i>&nbsp;Add New Product</h4>
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="query_product.php?f=add_product" id="form_add_product" method="POST">
+                        <!-- Nama Produk -->
+                        <div class="mb-3">
+                            <label for="lAddNamaProduk" class="form-label">Nama Produk</label>
+                            <input type="text" class="form-control" name="nama" id="nama" required>
+                        </div>
+                        <!-- SKU -->
+                        <div class="mb-3">
+                            <label for="lAddSKU" class="form-label">Nomor SKU</label>
+                            <input type="text" class="form-control" name="sku" id="sku" required>
+                        </div>
+                        <!-- Stok -->
+                        <div class="mb-3">
+                            <label for="lAddStok" class="form-label">Stok</label>
+                            <input type="number" class="form-control" name="stok" id="stok" required>
+                        </div>
+                        <!-- Alamat -->
+                        <div class="mb-3">
+                            <label for="lAddHargaSatuan" class="form-label">Harga Satuan</label>
+                            <input type="text" class="form-control" name="harga_satuan" id="harga_satuan" required>
+                        </div>
+                        <!-- Foto Produk -->
+                        <div class="mb-3">
+                            <label for="lAddImageProduk" class="form-label">File Foto</label>
+                            <input type="file" class="form-control" id="img_url" name="img_url" required>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" name="btn-add-product" id="btn_add_product" class="btn btn-primary">Tambah Produk</button>
+                        </div>
+                    </form>
+                </div> <!-- end .modal-body -->
             </div>
         </div>
-    </footer>
-    <!-- End of Footer -->
-</div>
-<!-- End of Content Wrapper -->
-</div>
-<!-- End of Page Wrapper -->
+    </div> <!-- End #Add New Product Modal -->
+    <!-- End .modal-fade / Modal Registration -->
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+    <!-- Modal Form Update -->
+    <div class="modal fade" id="updateProduct" tabindex="-1" aria-labelledby="labelUpdateProduk" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title text-center" id="titleProduk" aria-label="Close"><i class="fab fa-product-hunt"></i> Update
+                        Data Produk</h4>
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
 
-<!-- Modal Form Add New Product -->
-<div class="modal fade" id="modalAddProduct" tabindex="-1" aria-labelledby="labelAddProduk" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title text-center" id="titleAddDataProduk" aria-label="Close"><i class="fab fa-product-hunt"></i>&nbsp;Add New Product</h4>
-                </h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="query_product.php?f=update_product" id="formUpdate" method="POST">
+                        <input type="hidden" name="produk_id" class="produk_id" required>
+                        <!-- Nama Produk -->
+                        <div class="mb-3">
+                            <label for="lAddNamaProduk" class="form-label">Nama Produk</label>
+                            <input type="text" class="form-control" name="nama" id="nama" required>
+                        </div>
+                        <!-- SKU -->
+                        <div class="mb-3">
+                            <label for="lAddSKU" class="form-label">Nomor SKU</label>
+                            <input type="text" class="form-control" name="sku" id="sku" required>
+                        </div>
+                        <!-- Stok -->
+                        <div class="mb-3">
+                            <label for="lAddStok" class="form-label">Stok</label>
+                            <input type="number" class="form-control" name="stok" id="stok" required>
+                        </div>
+                        <!-- Alamat -->
+                        <div class="mb-3">
+                            <label for="lAddHargaSatuan" class="form-label">Harga Satuan</label>
+                            <input type="text" class="form-control" name="harga_satuan" id="harga_satuan" required>
+                        </div>
+                        <!-- Foto Produk -->
+                        <div class="mb-3">
+                            <label for="lAddImageProduk" class="form-label">File Foto</label>
+                            <input type="file" class="form-control" id="img_url" name="img_url" required>
+                            <span>Abaikan jika tidak mengganti gambar</span>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="button" name="btn-update-product" id="btn-update-product" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div> <!-- end .modal-body -->
             </div>
+        </div>
+    </div> <!-- End #registrasiModal -->
+    <!-- End .modal-fade / Modal Registration -->
 
-            <!-- Modal body -->
-            <div class="modal-body">
-                <form action="query_product.php?f=add_product">
-                    <!-- Nama Produk -->
-                    <div class="mb-3">
-                        <label for="lAddNamaProduk" class="form-label">Nama Produk</label>
-                        <input type="text" class="form-control" name="fProductName" id="fProductName">
-                    </div>
-                    <!-- SKU -->
-                    <div class="mb-3">
-                        <label for="lAddSKU" class="form-label">Nomor SKU</label>
-                        <input type="text" class="form-control" name="fsku" id="fsku">
-                    </div>
-                    <!-- Stok -->
-                    <div class="mb-3">
-                        <label for="lAddStok" class="form-label">Stok</label>
-                        <input type="number" class="form-control" name="fStok" id="fStok">
-                    </div>
-                    <!-- Alamat -->
-                    <div class="mb-3">
-                        <label for="lAddHargaSatuan" class="form-label">Harga Satuan</label>
-                        <input type="text" class="form-control" name="fHargaSatuan" id="fHargaSatuan">
-                    </div>
-                    <!-- Foto Produk -->
-                    <div class="mb-3">
-                        <label for="lAddImageProduk" class="form-label">File Foto</label>
-                        <input type="file" class="form-control" id="fImageProduct">
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button type="button" name="btn-add-product" id="btn_add_product" class="btn btn-primary">Tambah Produk</button>
-                    </div>
-                </form>
-            </div> <!-- end .modal-body -->
+    <!-- Delete Modal -->
+    <div class="modal fade" id="modal_delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="query_product.php?f=delete_product" method="POST" id="form_delete">
+                        <input type="hidden" name="produk_id" class="form-control produk_id">
+                </div>
+                <h3 class="text-center">Anda yakin menghapus produk ini?</h3>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-</div> <!-- End #Add New Product Modal -->
-<!-- End .modal-fade / Modal Registration -->
 
-<!-- Modal Form Update -->
-<div class="modal fade" id="updateDataProduk" tabindex="-1" aria-labelledby="updateDataProduk" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title text-center" id="titleDataProduk" aria-label="Close"><i class="fab fa-product-hunt"></i> Update
-                    Data Produk</h4>
-                </h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
+    <?php include 'layout_admin/footer.php'; ?>
 
-            <!-- Modal body -->
-            <div class="modal-body">
-                <form action="#">
-                    <!-- Nama Produk -->
-                    <div class="mb-3">
-                        <label for="lnamaProduk" class="form-label">Nama Produk</label>
-                        <input type="text" class="form-control" name="fnamaProduk" id="fnamaProduk">
-                    </div>
-                    <!-- SKU -->
-                    <div class="mb-3">
-                        <label for="lSKU" class="form-label">Nomor SKU</label>
-                        <input type="text" class="form-control" name="fSKU" id="fSKU">
-                    </div>
-                    <!-- Stok -->
-                    <div class="mb-3">
-                        <label for="lStok" class="form-label">Stok</label>
-                        <input type="number" class="form-control" name="fStok" id="fStok">
-                    </div>
-                    <!-- Alamat -->
-                    <div class="mb-3">
-                        <label for="lHargaSatuan" class="form-label">Harga Satuan</label>
-                        <input type="text" class="form-control" name="fHargaSatuan" id="fHargaSatuan">
-                    </div>
-                    <!-- Foto Produk -->
-                    <div class="mb-3">
-                        <label for="lImageProduk" class="form-label">File Foto</label>
-                        <input type="file" class="form-control" id="fImageProduk">
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button type="button" name="btn-update-product" id="btn-update-product" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
-            </div> <!-- end .modal-body -->
-        </div>
-    </div>
-</div> <!-- End #registrasiModal -->
-<!-- End .modal-fade / Modal Registration -->
-<?php include 'layout_admin/footer.php'; ?>
-</body>
+    <script>
+        $(document).ready(function() {
+            // Insert data
+            $('#btn_add_product').on('submit', '#form_add_product', function(e) {
+                let url = $('#form_add_product').attr('action');
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: $('#form_add_product').serialize(),
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function(data) {
+                        console.log($('#form_add_product').serialize())
+                        $('#modalAddProduct').modal('hide');
+                        $('#table_product').DataTable().ajax.reload();
+                        $('#form_add_product')[0].reset();
+                        alert(data);
+                        window.setTimeout(
+                            function() {
+                                location.reload(true)
+                            },
+                            2000
+                        );
+                    },
+                    error(err) {
+                        console.log(err);
+                    }
+                });
+                e.preventDefault();
+            });
 
-</html>
+            // Menampilkan data customers ke tabel
+            let tableProduct = $('#table_product').DataTable({
+                ajax: 'query_product.php?f=get_all_product',
+                columns: [{
+                        data: 'produk_id',
+                        visible: false
+                    },
+                    {
+                        data: 'img_url',
+                        render: function(data, type, row) {
+                            return '<img src="' + data + '" class="img-fluid" width="100px">';
+                        }
+                    },
+                    {
+                        data: 'nama'
+                    },
+                    {
+                        data: 'sku'
+                    },
+                    {
+                        data: 'stok'
+                    },
+                    {
+                        data: 'harga_satuan'
+                    },
+                    {
+                        defaultContent: '<button class="btn btn-primary btn-sm update" data-bs-toggle="modal" data-bs-target="#updateProduct"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-danger btn-sm delete"><i class="fas fa-trash-alt"></i></button>'
+                    }
+                ],
+            });
+
+            // Menampilkan data customer ke dalam form update
+            $('#table_product tbody').on('click', '.update', function() {
+                let row = $(this).closest('tr');
+                let produk_id = tableProduct.row(row).data().produk_id;
+                $.ajax({
+                    url: 'query_product.php?f=get_product_by_id&id=' + produk_id,
+                    type: 'POST',
+                    success: function(result) {
+                        let data = jQuery.parseJSON(result);
+                        $('#updateProduct').modal('show');
+                        $('#nama').val(data.nama);
+                        $('#sku').val(data.sku);
+                        $('#stok').val(data.stok);
+                        $('#harga_satuan').val(data.harga_satuan);
+                        //$('#img_url').val(data.img_url); // Image
+                        $('.produk_id').val(data.produk_id);
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                });
+            });
+
+            // Menyimpan data produk yang di update
+            $("#formUpdate").on('click', function() {
+                let url = $(this).attr('action');
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: $("#formUpdate").serialize(),
+                    success: function(result) {
+                        $("#updateProduct").modal('hide');
+                        alert(result);
+                        window.setTimeout(
+                            function() {
+                                location.reload(true)
+                            },
+                            3000
+                        );
+                    },
+                    error: function(error) {
+                        alert(error);
+                    }
+                });
+                return false;
+            });
+
+            // Menghapus data product
+            $('#table_product tbody').on('click', '.delete', function() {
+                let row = $(this).closest('tr');
+                let produk_id = tableProduct.row(row).data().produk_id;
+                $("#modal_delete").modal('show');
+                $('.produk_id').val(produk_id);
+                alert('Record deleted successfully');
+                window.setTimeout(
+                    function() {
+                        location.reload(true)
+                    },
+                    3000
+                );
+            });
+        });
+        // End jQready
+    </script>
+
+    </body>
+
+    </html>
