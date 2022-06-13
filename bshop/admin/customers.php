@@ -1,6 +1,8 @@
 <?php
 session_start();
-
+if (!isset($_SESSION['is_logged_in'])) {
+    header('Location: login.php');
+}
 include 'layout_admin/head.php';
 
 include 'layout_admin/sidebar.php';
@@ -174,6 +176,13 @@ include 'layout_admin/sidebar.php';
                 let pelanggan_id = tableCustomers.row(row).data().pelanggan_id;
                 $("#deleteModal").modal('show');
                 $('.pelanggan_id').val(pelanggan_id);
+                alert('Record deleted successfully');
+                window.setTimeout(
+                    function() {
+                        location.reload(true)
+                    },
+                    3000
+                );
             });
 
             // Update data customer
