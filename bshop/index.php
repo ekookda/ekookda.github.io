@@ -143,26 +143,20 @@ $layout = dirname(__FILE__) . "/layout_user/";
 
             // Checkout
             $('#btn_checkout').click(function(e) {
+                // Memastikan pembeli sudah login
                 if (<?php echo sizeof($_SESSION); ?> == 0) {
                     alert("Silahkan login terlebih dahulu");
                     e.preventDefault();
                 } else {
+                    // Mengambil cart product dari session storage
+                    const product = JSON.parse(sessionStorage.getItem('cart'));
                     $.ajax({
                         url: "q_transaction.php?f=add_transaction",
                         type: "POST",
+                        dataType: "json",
+                        data: $.parseJSON(product[i]),
                         success: function(result) {
-                            let d = $.parseJSON(result);
-                            if (d.status == 1) {
-                                alert(d.message);
-                                // window.setTimeout(
-                                //     function() {
-                                //         location.reload(true);
-                                //     },
-                                //     1000
-                                // );
-                            } else {
-                                alert(d.message);
-                            }
+                            
                         }
                     });
                 };
