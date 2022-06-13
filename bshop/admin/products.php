@@ -6,6 +6,7 @@ include 'layout_admin/head.php';
 include 'layout_admin/sidebar.php';
 
 ?>
+
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->
@@ -55,44 +56,6 @@ include 'layout_admin/sidebar.php';
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <img src="https://assets.jamtangan.com/images/product/alexandre-christie/ACF-6457-MCLIPBA/1l.jpg" class="card-img-top" alt="Image AC6457">
-                                    </td>
-                                    <td>Alexandre Christie Passion Men Chronograph Black</td>
-                                    <td>AC-6457</td>
-                                    <td>10</td>
-                                    <td>Rp 1.235.000</td>
-                                    <td>
-                                        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#updateDataProduk">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-danger delete" id="AC-6457">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <img src="https://assets.jamtangan.com/images/product/alexandre-christie/ACF-8331-MDBRGSL/1l.jpg" class="card-img-top" alt="Image MK7217">
-                                    </td>
-                                    <td>Michael Kors Lexington Woman</td>
-                                    <td>MK-7217</td>
-                                    <td>8</td>
-                                    <td>Rp 2.629.000</td>
-                                    <td>
-                                        <button type='button' class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#updateDataProduk">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-danger delete" id="MK-7217">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -123,7 +86,7 @@ include 'layout_admin/sidebar.php';
 </a>
 
 <!-- Modal Form Add New Product -->
-<div class="modal fade" id="addDataProduk" tabindex="-1" aria-labelledby="addDataProduk" aria-hidden="true">
+<div class="modal fade" id="modalAddProduct" tabindex="-1" aria-labelledby="labelAddProduk" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
@@ -135,34 +98,34 @@ include 'layout_admin/sidebar.php';
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="#">
+                <form action="query_product.php?f=add_product">
                     <!-- Nama Produk -->
                     <div class="mb-3">
                         <label for="lAddNamaProduk" class="form-label">Nama Produk</label>
-                        <input type="text" class="form-control" name="fAddNamaProduk" id="fAddNamaProduk">
+                        <input type="text" class="form-control" name="fProductName" id="fProductName">
                     </div>
                     <!-- SKU -->
                     <div class="mb-3">
                         <label for="lAddSKU" class="form-label">Nomor SKU</label>
-                        <input type="text" class="form-control" name="fAddSKU" id="fAddSKU">
+                        <input type="text" class="form-control" name="fsku" id="fsku">
                     </div>
                     <!-- Stok -->
                     <div class="mb-3">
                         <label for="lAddStok" class="form-label">Stok</label>
-                        <input type="number" class="form-control" name="fAddStok" id="fAddStok">
+                        <input type="number" class="form-control" name="fStok" id="fStok">
                     </div>
                     <!-- Alamat -->
                     <div class="mb-3">
                         <label for="lAddHargaSatuan" class="form-label">Harga Satuan</label>
-                        <input type="text" class="form-control" name="fAddHargaSatuan" id="fAddHargaSatuan">
+                        <input type="text" class="form-control" name="fHargaSatuan" id="fHargaSatuan">
                     </div>
                     <!-- Foto Produk -->
                     <div class="mb-3">
                         <label for="lAddImageProduk" class="form-label">File Foto</label>
-                        <input type="file" class="form-control" id="fAddImageProduk">
+                        <input type="file" class="form-control" id="fImageProduct">
                     </div>
                     <div class="d-grid gap-2">
-                        <button type="button" name="btn-add-product" id="btn-add-product" class="btn btn-primary">Tambah Produk</button>
+                        <button type="button" name="btn-add-product" id="btn_add_product" class="btn btn-primary">Tambah Produk</button>
                     </div>
                 </form>
             </div> <!-- end .modal-body -->
