@@ -42,13 +42,13 @@ function add_product($db)
 function update_product($db)
 {
     $produk_id = validasi_input($_POST['produk_id']);
-    $nama_produk = validasi_input($_POST['fproductname']);
+    $product_name = validasi_input($_POST['fProductName']);
     $sku = validasi_input($_POST['fsku']);
-    $stok = validasi_input($_POST['fstok']);
-    $harga_satuan = validasi_input($_POST['fharga_satuan']);
-    $img_url = validasi_input($_POST['fimage_url']);
+    $stok = validasi_input($_POST['fStok']);
+    $harga_satuan = validasi_input($_POST['fHargaSatuan']);
+    $image_url = $_POST['fImageProduct'];
 
-    $sql = "UPDATE produk SET nama='$nama_produk', sku='$sku', stok='$stok', harga_satuan='$harga_satuan', img_url='$img_url' WHERE produk_id='$produk_id'";
+    $sql = "UPDATE produk SET nama='$product_name', sku='$sku', stok='$stok', harga_satuan='$harga_satuan', img_url='$image_url' WHERE produk_id='$produk_id'";
 
     if ($db->query($sql) === TRUE) {
         echo "Record has been updated successfully";
