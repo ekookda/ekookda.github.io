@@ -3,7 +3,7 @@
     <div class="container py-3">
         <div class="row shadow p-3 mb-0 bg-body rounded list-product">
             <!-- Left Section => New Product -->
-            <div class="col-sm-3 mt-0 p-2">
+            <div class="col-sm-3 mt-0 p-2 card-group">
                 <div class="card">
                     <a class='zoom' id='ex1'>
                         <span class="badge bg-secondary text-light rounded-pill position-absolute px-3 m-2">FREE
@@ -23,7 +23,6 @@
                     </div> <!-- End .card-body -->
                 </div> <!-- End .card -->
             </div> <!-- End .col-sm-3 mt-0 p-2  -->
-
             <!-- Left Section => New Product -->
             <div class="col-sm-3 mt-0 p-2">
                 <div class="card">
@@ -45,7 +44,6 @@
                     </div> <!-- End .card-body -->
                 </div> <!-- End .card -->
             </div> <!-- End .col-sm-3 mt-0 p-2  -->
-
             <div class="col-sm-3 mt-0 p-2">
                 <div class="card">
                     <a class='zoom' id='ex3'>
@@ -67,7 +65,6 @@
                     </div> <!-- End .card-body -->
                 </div> <!-- End .card -->
             </div> <!-- End .col-sm-3 mt-0 p-2  -->
-
             <!-- Left Section => New Product -->
             <div class="col-sm-3 mt-0 p-2">
                 <div class="card">
@@ -89,6 +86,7 @@
                     </div> <!-- End .card-body -->
                 </div> <!-- End .card -->
             </div> <!-- End .col-sm-3 mt-0 p-2  -->
+
 
         </div> <!-- End .row bg-secondary -->
     </div> <!-- End .container -->
@@ -140,7 +138,7 @@
             </table>
             <button type="button" onclick="emptyCart()" id="emptyCart" class="btn btn-outline-danger mb-3">Empty
                 Cart</button>
-            <button type="button" onclick="checkOut()" id="checkOut" class="btn btn-outline-success mb-3 ms-1 float-end">Checkout</button>
+            <button type="button" id="btn_checkout" class="btn btn-outline-success mb-3 ms-1 float-end">Checkout</button>
         </div> <!-- End .table-responsive -->
     </div> <!-- End .container shadow -->
     <hr class="mb-0">
