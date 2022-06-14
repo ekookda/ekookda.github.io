@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once dirname(__DIR__, 1) . '/connection.php';
 include_once dirname(__DIR__, 1) . '/function.php';
 
