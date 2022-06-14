@@ -7,23 +7,23 @@ $(document).ready(function () {
         dateFormat: "yy-mm-dd"
     });
 
-    // function wishlist
-    const wishlist = function (id, className) {
-        if (className == 'far fa-heart') {
-            $(`#${id}`).removeClass('far fa-heart').addClass('fas fa-heart wishlist');
-        } else {
-            $(`#${id}`).removeClass('fas fa-heart wishlist').addClass('far fa-heart');
-        }
-    }
-
     // onclick wishlist button
-    const wishlistLength = $('.fa-heart').length;
+    let wishlistLength = $('.fa-heart').length;
     for (let i = 0; i < wishlistLength; i++) {
         $(`#wishlist${i}`).click(function () {
             let id = $(`#wishlist${i}`).attr('id');
             let className = $(`#wishlist${i}`).attr('class');
             wishlist(id, className);
         });
+    }
+    console.log(wishlistLength);
+
+    function wishlist(id, className) {
+        if (className == 'far fa-heart') {
+            $(`#${id}`).removeClass('far fa-heart').addClass('fas fa-heart wishlist');
+        } else {
+            $(`#${id}`).removeClass('fas fa-heart wishlist').addClass('far fa-heart');
+        }
     }
 
     // Autocomplete search product
@@ -125,7 +125,7 @@ $(document).ready(function () {
         success: function (result) {
             let product = $.parseJSON(result);
             for (let i = 0; i < product.length; i++) {
-                $(".card-group").append('<div class="col-sm-3 mt-0 p-2"><div class="card"><a class="zoom" id="ex' + i + '"><img class="card-img-top" src="' + product[i].img_url + '" alt="Card image cap"></a><div class="card-body"><h6 class="card-title text-center productname">' + product[i].nama + '</h6><span class="badge rounded-pill positionl float-end px-3 m-2"><i class="far fa-heart" id="wishlist"' + i + '"></i></span><p class="card-text p-0 m-0 sku">' + product[i].sku + '</p><p class="card-text p-0 mb-0 price" id="price">Rp ' + product[i].harga_satuan + ' </p><p class="card-text p-0 mb-0 stok"><small class="text-muted">Stok ' + product[i].stok + ' item</small></p><input type="number" class="form-control quantity" name="fAddToCart" placeholder="Jumlah item yang dibeli" min="1" aria-label="Add To Cart" aria-describedby="btn-addToCart" required><button type="submit" class="btn btn-primary mt-1 add_to_cart">Add to cart</button></div></div></div>');
+                $(".card-group").append('<div class="col-sm-3 mt-0 p-2"><div class="card"><a class="zoom" id="ex' + i + '"><img class="card-img-top" src="' + product[i].img_url + '" alt="Card image cap"></a><div class="card-body"><h6 class="card-title text-center productname">' + product[i].nama + '</h6><span class="badge rounded-pill positionl float-end px-3 m-2"><i class="far fa-heart" id="wishlist' + i + '"></i></span><p class="card-text p-0 m-0 sku">' + product[i].sku + '</p><p class="card-text p-0 mb-0 price" id="price">Rp ' + product[i].harga_satuan + ' </p><p class="card-text p-0 mb-0 stok"><small class="text-muted">Stok ' + product[i].stok + ' item</small></p><input type="number" class="form-control quantity" name="fAddToCart" placeholder="Jumlah item yang dibeli" min="1" aria-label="Add To Cart" aria-describedby="btn-addToCart" required><button type="submit" class="btn btn-primary mt-1 add_to_cart">Add to cart</button></div></div></div>');
             }
         },
         error: function () {
