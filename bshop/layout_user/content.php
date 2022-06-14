@@ -1,92 +1,10 @@
 <!-- List Product -->
-<div class="container-fluidm mt-0 bg-light">
+<div class="container-fluid mt-0 bg-light">
     <div class="container py-3">
         <div class="row shadow p-3 mb-0 bg-body rounded list-product">
-            <!-- Left Section => New Product -->
-            <div class="col-sm-3 mt-0 p-2 card-group">
-                <div class="card">
-                    <a class='zoom' id='ex1'>
-                        <span class="badge bg-secondary text-light rounded-pill position-absolute px-3 m-2">FREE
-                            ONGKIR</span>
-                        <img src="https://assets.jamtangan.com/images/product/alexandre-christie/ACF-8331-MDBRGSL/1l.jpg" class="card-img-top" alt="Image MK7217">
-                    </a>
-                    <div class="card-body">
-                        <h6 class="card-title text-center productname">Michael Kors Lexington Woman</h6>
-                        <span class="badge rounded-pill positionl float-end px-3 m-2">
-                            <i class="far fa-heart" id="wishlist0"></i>
-                        </span>
-                        <p class="card-text p-0 m-0 sku">MK-7217</p>
-                        <p class="card-text p-0 mb-0 price" id="price">Rp 2.629.000</p>
-                        <input type="number" name="fAddToCart" class="form-control quantity" placeholder="" min="1" aria-label="Add To Cart" aria-describedby="btn-addToCart" required>
-                        <button class="btn btn-primary mt-1 btn-cart" type="button">Add to
-                            cart</button>
-                    </div> <!-- End .card-body -->
-                </div> <!-- End .card -->
-            </div> <!-- End .col-sm-3 mt-0 p-2  -->
-            <!-- Left Section => New Product -->
-            <div class="col-sm-3 mt-0 p-2">
-                <div class="card">
-                    <a class='zoom' id='ex2'>
-                        <span class="badge bg-success text-light rounded-pill position-absolute px-3 m-2">TERLARIS</span>
-                        <img src="https://assets.jamtangan.com/images/product/alexandre-christie/ACF-6457-MCLIPBA/1l.jpg" class="card-img-top" alt="Image AC6457">
-                    </a>
-                    <div class="card-body">
-                        <h6 class="card-title text-center productname">
-                            Alexandre Christie Passion Men Chronograph Black
-                        </h6>
-                        <span class="badge rounded-pill positionl float-end px-3 m-2">
-                            <i class="far fa-heart" id="wishlist1"></i>
-                        </span>
-                        <p class="card-text p-0 m-0 sku">AC-6457</p>
-                        <p class="card-text p-0 mb-0 price" id="price">Rp 1.235.000</p>
-                        <input type="number" name="fAddToCart" class="form-control quantity" placeholder="" min="1" aria-label="Add To Cart" aria-describedby="btn-addToCart" required>
-                        <button class="btn btn-primary mt-1 btn-cart" type="button">Add to cart</button>
-                    </div> <!-- End .card-body -->
-                </div> <!-- End .card -->
-            </div> <!-- End .col-sm-3 mt-0 p-2  -->
-            <div class="col-sm-3 mt-0 p-2">
-                <div class="card">
-                    <a class='zoom' id='ex3'>
-                        <span class="badge bg-warning text-light rounded-pill position-absolute px-3 m-2">FREE
-                            ONGKIR</span>
-                        <img src="https://assets.jamtangan.com/images/product/alexandre-christie/ACF-6457-MCLIPGR/1l.jpg" class="card-img-top" alt="Image AX1348">
-                    </a>
-                    <div class="card-body">
-                        <h6 class="card-title text-center productname">
-                            Armani Exchange Chronograph Men Black Rubber Strap
-                        </h6>
-                        <span class="badge rounded-pill positionl float-end px-3 m-2">
-                            <i class="far fa-heart" id="wishlist2"></i>
-                        </span>
-                        <p class="card-text p-0 m-0 sku">AX-1348</p>
-                        <p class="card-text p-0 mb-0 price" id="price">Rp 1.500.000</p>
-                        <input type="number" name="fAddToCart" class="form-control quantity" placeholder="" min="1" aria-label="Add To Cart" aria-describedby="btn-addToCart" required>
-                        <button class="btn btn-primary mt-1 btn-cart" type="button">Add to cart</button>
-                    </div> <!-- End .card-body -->
-                </div> <!-- End .card -->
-            </div> <!-- End .col-sm-3 mt-0 p-2  -->
-            <!-- Left Section => New Product -->
-            <div class="col-sm-3 mt-0 p-2">
-                <div class="card">
-                    <a class='zoom' id='ex4'>
-                        <span class="badge bg-info text-light rounded-pill position-absolute px-3 m-2">TERMURAH</span>
-                        <img src="https://assets.jamtangan.com/images/product/alexandre-christie/ACF-6292-BFBTBBA/1l.jpg" class="card-img-top" alt="Image FJ-3028">
-                    </a>
-                    <div class="card-body">
-                        <h6 class="card-title text-center productname">
-                            Fjord Vendela Men Black Dial Green Leather Strap
-                        </h6>
-                        <span class="badge rounded-pill positionl float-end px-3 m-2">
-                            <i class="far fa-heart" id="wishlist3"></i>
-                        </span>
-                        <p class="card-text p-0 m-0 sku">FJ-3028</p>
-                        <p class="card-text p-0 mb-0 price" id="price">Rp 624.000</p>
-                        <input type="number" name="fAddToCart" class="form-control quantity" placeholder="" min="1" aria-label="Add To Cart" aria-describedby="btn-addToCart" required>
-                        <button class="btn btn-primary mt-1 btn-cart" type="button">Add to cart</button>
-                    </div> <!-- End .card-body -->
-                </div> <!-- End .card -->
-            </div> <!-- End .col-sm-3 mt-0 p-2  -->
-
+            <!-- Card Group -->
+            
+            <!-- End .col-sm-3 mt-0 p-2 card-group -->
 
         </div> <!-- End .row bg-secondary -->
     </div> <!-- End .container -->
