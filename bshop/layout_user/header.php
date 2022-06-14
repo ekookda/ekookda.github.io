@@ -17,9 +17,7 @@
                 <div class="carousel-item">
                     <img src="https://assets.jamtangan.com/images/banners/home/H1/b/0522/-e-6402-48f5a5f125d782795dfdaa2cd889949a.jpg" class="d-block w-100 img-fluid mx-auto" width="1316" height="329" alt="Image Carousel 2">
                 </div>
-                <div class="carousel-item">
-                    <img src="https://assets.jamtangan.com/images/banners/home/H1/b/0522/wow-ff4ff68df52217764cf00d6b416ac819.jpg" class="d-block w-100 img-fluid mx-auto" width="1316" height="329" alt="Image Carousel 3">
-                </div>
+                
                 <div class="carousel-item">
                     <img src="https://assets.jamtangan.com/images/banners/home/H1/b/0522/sla061j1-limited-edition-ef7e487379f4a3e4c76400f10e940363.jpg" class="d-block w-100 img-fluid mx-auto" width="1316" height="329" alt="Image Carousel 4">
                 </div>

@@ -1,5 +1,8 @@
+/* get cart total from session on load */
+updateCartTotal();
+
 // onclick addToCart
-const btnCart = document.getElementsByClassName("btn-cart");
+let btnCart = document.getElementsByClassName("add_to_cart");
 for (let i = 0; i < btnCart.length; i++) {
 	btnCart[i].addEventListener("click", function () {
 		addToCart(this);
@@ -7,30 +10,33 @@ for (let i = 0; i < btnCart.length; i++) {
 }
 
 // NumberFormat Rupiah
-const rupiah = (angka) => {
+function rupiah(angka) {
 	return new Intl.NumberFormat("id-ID", {
 		style: "currency",
 		currency: "IDR",
 	}).format(angka);
-};
+}
 
 // function to convert string to number
-const toAngka = (rupiah) => parseInt(rupiah.replace(/,.*|\D/g, ""), 10);
+function toAngka(rupiah) {
+	return parseInt(rupiah.replace(/,.*|\D/g, ""), 10);
+}
 
 // Function addToCart
-const addToCart = function (e) {
+function addToCart(e) {
 	// initialize
-	let getProductName = null;
-	let getSKU = null;
-	let getProductPrice = null;
-	let getProductQuantity = null;
+	let getProductName;
+	let getSKU;
+	let getProductPrice;
+	let getProductQuantity;
 	let sibs = [];
 	let cart = [];
 
 	//cycles siblings for product info near the add button
 	while ((e = e.previousSibling)) {
 		// console.log(e);
-		if (e.nodeType === 3) continue; // text nodex
+		if (e.nodeType === 3)
+			continue; // text nodex
 		if (e.className.match("price") == "price") {
 			getProductPrice = toAngka(e.innerText);
 		}
@@ -78,10 +84,10 @@ const addToCart = function (e) {
 		sessionStorage.setItem("cart", stringCart);
 		updateCartTotal();
 	}
-};
+}
 
 /* Calculate Cart Total */
-const updateCartTotal = function () {
+function updateCartTotal() {
 	//init
 	let sumPrice = 0;
 	let total = 0;
@@ -139,20 +145,20 @@ const updateCartTotal = function () {
 	document.getElementById("cartTable").innerHTML = cartTable;
 	//update items in cart on website HTML
 	document.getElementById("totalItem").innerHTML = qtyItem;
-};
+}
 
 //user feedback on successful add
-const addedToCart = function (pname) {
+function addedToCart(pname) {
 	let message = pname + " was added to the cart";
 	let alerts = document.getElementById("alerts");
 	alerts.innerHTML = message;
 	if (!alerts.classList.contains("message")) {
 		alerts.classList.add("message");
 	}
-};
+}
 
 /* User Manually empty cart */
-const emptyCart = function () {
+function emptyCart() {
 	//remove cart session storage object & refresh cart totals
 	if (sessionStorage.getItem("cart")) {
 		sessionStorage.removeItem("cart");
@@ -164,48 +170,4 @@ const emptyCart = function () {
 			alerts.classList.remove("message");
 		}
 	}
-};
-
-/* get cart total from session on load */
-updateCartTotal();
-
-$(document).ready(function () {
-	// Datepicker
-	$("#fTglLahir").datepicker({
-		dateFormat: "yy-mm-dd"
-	});
-	// Image Zoom
-	$('.zoom').zoom();
-	// function wishlist
-	const wishlist = function (id, className) {
-		if (className == 'far fa-heart') {
-			$(`#${id}`).removeClass('far fa-heart').addClass('fas fa-heart wishlist');
-		} else {
-			$(`#${id}`).removeClass('fas fa-heart wishlist').addClass('far fa-heart');
-		}
-	}
-	// onclick wishlist button
-	const wishlistLength = $('.fa-heart').length;
-	for (let i = 0; i < wishlistLength; i++) {
-		$(`#wishlist${i}`).click(function () {
-			let id = $(`#wishlist${i}`).attr('id');
-			let className = $(`#wishlist${i}`).attr('class');
-			wishlist(id, className);
-		});
-	}
-
-	// Autocomplete search product
-	const listProduct = [
-		"Michael Kors Lexington Woman",
-		"Alexandre Christie Passion Men Chronograph Black",
-		"Armani Exchange Chronograph Men Black Rubber Strap",
-		"Fjord Vendela Men Black Dial Green Leather Strap",
-	];
-	$("#search-box").autocomplete({
-		source: listProduct,
-		minLength: 2,
-		classes: {
-			"ui-autocomplete": "autoCompleteList"
-		}
-	});
-});
+}

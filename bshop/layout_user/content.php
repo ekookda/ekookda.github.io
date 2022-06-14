@@ -3,9 +3,8 @@
     <div class="container py-3">
         <div class="row shadow p-3 mb-0 bg-body rounded list-product">
             <!-- Card Group -->
-            
+            <div class="card-group"></div>
             <!-- End .col-sm-3 mt-0 p-2 card-group -->
-
         </div> <!-- End .row bg-secondary -->
     </div> <!-- End .container -->
     <hr>

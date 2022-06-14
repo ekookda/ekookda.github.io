@@ -33,11 +33,11 @@ $layout = dirname(__FILE__) . "/layout_user/";
 
     <?php include_once $layout . "content.php"; ?>
 
-    <?php include_once $layout . "footer.php"; ?>
-
     <?php include_once $layout . "modal_registrasi.php"; ?>
 
     <?php include_once $layout . "modal_login.php"; ?>
+
+    <?php include_once $layout . "footer.php"; ?>
 
     <!-- Jquery Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -48,141 +48,182 @@ $layout = dirname(__FILE__) . "/layout_user/";
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Jquery Zoom Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js" integrity="sha512-m5kAjE5cCBN5pwlVFi4ABsZgnLuKPEx0fOnzaH5v64Zi3wKnhesNUYq4yKmHQyTa3gmkR6YeSKW1S+siMvgWtQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="myScript.js"></script>
+    <!-- <script src="myScript.js"></script> -->
+    <script src="myJquery.js"></script>
     <script>
-        $(document).ready(function() {
-            // Cek jumlah session
-            let count_session = <?php echo count($_SESSION); ?>;
-            if (count_session != 0) {
-                $('#btnLogin').hide();
-                $('#btnRegister').hide();
-                $('#btnLogout').show();
-            } else {
-                $('#btnLogin').show();
-                $('#btnRegister').show();
-                $('#btnLogout').hide();
+        /* get cart total from session on load */
+        updateCartTotal();
+
+        // onclick addToCart
+        let btnCart = document.getElementsByClassName("add_to_cart");
+        for (let i = 0; i < btnCart.length; i++) {
+            btnCart[i].addEventListener("click", function() {
+                addToCart(this);
+            });
+        }
+
+        // NumberFormat Rupiah
+        function rupiah(angka) {
+            return new Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR",
+            }).format(angka);
+        }
+
+        // function to convert string to number
+        function toAngka(rupiah) {
+            return parseInt(rupiah.replace(/,.*|\D/g, ""), 10);
+        }
+
+        // Function addToCart
+        function addToCart(e) {
+            // initialize
+            let getProductName;
+            let getSKU;
+            let getProductPrice;
+            let getProductQuantity;
+            let sibs = [];
+            let cart = [];
+
+            //cycles siblings for product info near the add button
+            while ((e = e.previousSibling)) {
+                // console.log(e);
+                if (e.nodeType === 3)
+                    continue; // text nodex
+                if (e.className.match("price") == "price") {
+                    getProductPrice = toAngka(e.innerText);
+                }
+                if (e.className.match("productname") == "productname") {
+                    getProductName = e.innerText;
+                }
+                if (e.className.match("sku") == "sku") {
+                    getSKU = e.innerText;
+                }
+                if (e.className.match("quantity") == "quantity") {
+                    getProductQuantity = e.value;
+                }
+                sibs.push(e);
             }
 
-            $('#btnRegister').click(function(reload) {
-                // reset form
-                $('#formRegistrasi')[0].reset();
-            });
+            //create product object
+            const product = {
+                productname: getProductName,
+                price: getProductPrice,
+                sku: getSKU,
+                quantity: getProductQuantity,
+            };
 
-            // submit register
-            $('#formRegistrasi').submit(function(e) {
-                let url = $(this).attr("action");
-                $.ajax({
-                    type: $(this).attr("method"),
-                    url: url,
-                    data: $(this).serialize(),
-                    success: function(response) {
-                        let d = $.parseJSON(response);
-                        if (d.status == 1) {
-                            $('#registrasiModal').modal('hide');
-                            alert(d.message);
-                            window.setTimeout(
-                                function() {
-                                    location.reload(true);
-                                },
-                                1000
-                            );
-                        } else {
-                            alert(d.message);
-                        }
-                    },
-                    error: function(requestObject, error, errorThrown) {
-                        alert(error);
-                        console.log(errorThrown);
-                    }
-                });
-                e.preventDefault();
-            });
+            //convert product data to JSON for storage
+            let stringProduct = JSON.stringify(product);
 
-            // submit login
-            $('#form_login').submit(function(e) {
-                $.ajax({
-                    type: $(this).attr("method"),
-                    url: $(this).attr("action"),
-                    data: $(this).serialize(),
-                    success: function(response) {
-                        let d = $.parseJSON(response);
-                        if (d.status == 1) {
-                            $('#modal_login').modal('hide');
-                            alert(d.message);
-                            // console.log(d);
-                            window.setTimeout(
-                                function() {
-                                    location.reload(true);
-                                },
-                                1000
-                            );
-                        } else {
-                            alert(d.message);
-                        }
-                    },
-                    error: function(requestObject, error, errorThrown) {
-                        alert(error);
-                        console.log(errorThrown);
-                    }
-                });
-                e.preventDefault();
-            });
+            /*send product data to session storage */
+            if (!sessionStorage.getItem("cart")) {
+                //append product JSON object to cart array
+                cart.push(stringProduct);
+                //cart to JSON
+                stringCart = JSON.stringify(cart);
+                //create session storage cart item
+                sessionStorage.setItem("cart", stringCart);
+                addedToCart(getProductName);
+                updateCartTotal();
+            } else {
+                //get existing cart data from storage and convert back into array
+                cart = JSON.parse(sessionStorage.getItem("cart"));
+                //append new product JSON object
+                cart.push(stringProduct);
+                //cart back to JSON
+                stringCart = JSON.stringify(cart);
+                //overwrite cart data in sessionstorage
+                sessionStorage.setItem("cart", stringCart);
+                updateCartTotal();
+            }
+        }
 
-            // Menampilkan gambar produk dalam card
+        /* Calculate Cart Total */
+        function updateCartTotal() {
+            //init
+            let sumPrice = 0;
+            let total = 0;
+            let items = 0;
+            let no = 1;
+            let productName = null;
+            let productSKU = null;
+            let productQty = null;
+            let productPrice = null;
+            let qtyItem = 0;
+            let cartTable = "";
+            if (sessionStorage.getItem("cart")) {
+                //get cart data & parse to array
+                let cart = JSON.parse(sessionStorage.getItem("cart"));
+                //get no of items in cart
+                items = cart.length;
 
-            $.ajax({
-                url: "q_product.php?f=get_all_product",
-                type: "POST",
-                success: function(result) {
-                    let product = $.parseJSON(result);
-                    // console.log(product);
-                    for (let i = 0; i < product.length; i++) {
-                        $(".list-product").append('<div class="col-sm-3 mt-0 p-2 card-group"><div class="card"><a class="zoom" id="ex' + i + '"><img class="card-img-top" src="' + product[i].img_url + '" alt="Card image cap"></a><div class="card-body"><h6 class="card-title text-center productname">' + product[i].nama + '</h6><span class="badge rounded-pill positionl float-end px-3 m-2"><i class="far fa-heart" id="wishlist"'+ i +'"></i></span><p class="card-text p-0 m-0 sku">' + product[i].sku + '</p><p class="card-text p-0 mb-0 price" id="price">Rp ' + product[i].harga_satuan + ' </p><p class="card-text p-0 mb-0 stok"><small class="text-muted">Stok ' + product[i].stok + ' item</small></p><input type="number" class="form-control quantity" name="fAddToCart" placeholder="Jumlah item yang dibeli" min="1" aria-label="Add To Cart" aria-describedby="btn-addToCart" required><button type="button" class="btn btn-primary mt-1 btn-cart">Add to cart</button></div></div></div>');
-                    }
-                },
-                error: function(){
-                    alert("failure");
+                //loop over cart array
+                for (let i = 0; i < items; i++) {
+                    //convert each JSON product in array back into object
+                    let x = JSON.parse(cart[i]);
+                    //get property value of price
+                    // price = parseFloat(x.price.split("Rp ")[1]);
+                    productPrice = x.price;
+                    productName = x.productname;
+                    productSKU = x.sku;
+                    productQty = x.quantity;
+                    sumPrice = productPrice * productQty;
+
+                    //add price to total
+                    cartTable +=
+                        "<tr><td>" +
+                        no +
+                        "</td><td>" +
+                        productName +
+                        "</td><td>" +
+                        productSKU +
+                        '</td><td class="text-center">' +
+                        productQty +
+                        "</td><td>Rp " +
+                        productPrice +
+                        "</td><td>" +
+                        rupiah(sumPrice) +
+                        "</td>" +
+                        '<td class="text-center"><button class=""><i class="fas fa-window-close" style="color:red "></button>' +
+                        "</td></tr>";
+                    total += sumPrice;
+                    qtyItem += parseInt(productQty);
+                    no++;
                 }
-            });
+            }
+            //update total on website HTML
+            document.getElementById("totalPrice").innerHTML = rupiah(total);
+            // insert saved products to cart table
+            document.getElementById("cartTable").innerHTML = cartTable;
+            //update items in cart on website HTML
+            document.getElementById("totalItem").innerHTML = qtyItem;
+        }
 
-            // Checkout
-            $('#btn_checkout').click(function(e) {
-                // Memastikan pembeli sudah login
-                // if (count_session == 0) {
-                //     alert("Silahkan login terlebih dahulu");
-                //     e.preventDefault();
-                // } else {
-                // Mengambil cart product dari session storage
-                const product = JSON.parse(sessionStorage.getItem('cart'));
-                $.ajax({
-                    url: "q_transaction.php?f=add_transaction",
-                    type: "POST",
-                    dataType: "json",
-                    data: $.parseJSON(product[i]),
-                    success: function(result) {
-                        //var product=jQuery.parseJSON(result)
-                    },
-                    error: function() {
-                        //alert("failure");
-                    }
-                });
-                for (let i = 0; i < product.length; i++) {
-                    $.ajax({
-                        url: 'q_transaction.php?f=add_detail_transaction',
-                        type: "POST",
-                        dataType: "json",
-                        data: JSON.parse(product[i]),
-                        success: function(result) {
-                            //var product=jQuery.parseJSON(result)
-                        },
-                        error: function() {
-                            //alert("failure");
-                        }
-                    });
+        //user feedback on successful add
+        function addedToCart(pname) {
+            let message = pname + " was added to the cart";
+            let alerts = document.getElementById("alerts");
+            alerts.innerHTML = message;
+            if (!alerts.classList.contains("message")) {
+                alerts.classList.add("message");
+            }
+        }
+
+        /* User Manually empty cart */
+        function emptyCart() {
+            //remove cart session storage object & refresh cart totals
+            if (sessionStorage.getItem("cart")) {
+                sessionStorage.removeItem("cart");
+                updateCartTotal();
+                //clear message and remove class style
+                const alerts = document.getElementById("alerts");
+                alerts.innerHTML = "";
+                if (alerts.classList.contains("message")) {
+                    alerts.classList.remove("message");
                 }
-                // };
-            });
-        });
+            }
+        }
     </script>
 </body>
 
