@@ -52,7 +52,8 @@ $layout = dirname(__FILE__) . "/layout_user/";
     <script>
         $(document).ready(function() {
             // Cek jumlah session
-            if (<?php echo sizeof($_SESSION); ?> != 0) {
+            let count_session = <?php echo count($_SESSION); ?>;
+            if (count_session != 0) {
                 $('#btnLogin').hide();
                 $('#btnRegister').hide();
                 $('#btnLogout').show();
@@ -127,39 +128,59 @@ $layout = dirname(__FILE__) . "/layout_user/";
                 e.preventDefault();
             });
 
-            // Menampilkan gambar card
-            /*
+            // Menampilkan gambar produk dalam card
+
             $.ajax({
-                url: "q_product.php?f=get_product",
+                url: "q_product.php?f=get_all_product",
                 type: "POST",
                 success: function(result) {
                     let product = $.parseJSON(result);
+                    // console.log(product);
                     for (let i = 0; i < product.length; i++) {
-                        $(".card-group").append('<div class="card"><a class="zoom" id="ex' + i + '"><img class="card-img-top" src="' + product[i].img_url + '" alt="Card image cap"></a><div class="card-body"><h6 class="card-title text-center productname">' + product[i].nama + '</h6><span class="badge rounded-pill positionl float-end px-3 m-2"><i class="far fa-heart" id="wishlist0"></i></span><p class="card-text p-0 m-0 sku">' + product[i].sku + '</p><p class="card-text p-0 mb-0 price">Rp ' + product[i].harga_satuan + ' </p><p class="card-text p-0 mb-0"><small class="text-muted">Stok ' + product[i].stok + ' item</small></p><input type="number" class="form-control quantity" name="fAddToCart" placeholder="Masukan jumlah item yang akan dibeli" min="1" aria-label="Add To Cart" aria-describedby="btn-addToCart" required><a href="#" class="btn btn-primary mt-1 btn-cart">Add to cart</a></div></div>');
+                        $(".list-product").append('<div class="col-sm-3 mt-0 p-2 card-group"><div class="card"><a class="zoom" id="ex' + i + '"><img class="card-img-top" src="' + product[i].img_url + '" alt="Card image cap"></a><div class="card-body"><h6 class="card-title text-center productname">' + product[i].nama + '</h6><span class="badge rounded-pill positionl float-end px-3 m-2"><i class="far fa-heart" id="wishlist"'+ i +'"></i></span><p class="card-text p-0 m-0 sku">' + product[i].sku + '</p><p class="card-text p-0 mb-0 price" id="price">Rp ' + product[i].harga_satuan + ' </p><p class="card-text p-0 mb-0 stok"><small class="text-muted">Stok ' + product[i].stok + ' item</small></p><input type="number" class="form-control quantity" name="fAddToCart" placeholder="Jumlah item yang dibeli" min="1" aria-label="Add To Cart" aria-describedby="btn-addToCart" required><button type="button" class="btn btn-primary mt-1 btn-cart">Add to cart</button></div></div></div>');
                     }
+                },
+                error: function(){
+                    alert("failure");
                 }
             });
-            */
 
             // Checkout
             $('#btn_checkout').click(function(e) {
                 // Memastikan pembeli sudah login
-                if (<?php echo sizeof($_SESSION); ?> == 0) {
-                    alert("Silahkan login terlebih dahulu");
-                    e.preventDefault();
-                } else {
-                    // Mengambil cart product dari session storage
-                    const product = JSON.parse(sessionStorage.getItem('cart'));
+                // if (count_session == 0) {
+                //     alert("Silahkan login terlebih dahulu");
+                //     e.preventDefault();
+                // } else {
+                // Mengambil cart product dari session storage
+                const product = JSON.parse(sessionStorage.getItem('cart'));
+                $.ajax({
+                    url: "q_transaction.php?f=add_transaction",
+                    type: "POST",
+                    dataType: "json",
+                    data: $.parseJSON(product[i]),
+                    success: function(result) {
+                        //var product=jQuery.parseJSON(result)
+                    },
+                    error: function() {
+                        //alert("failure");
+                    }
+                });
+                for (let i = 0; i < product.length; i++) {
                     $.ajax({
-                        url: "q_transaction.php?f=add_transaction",
+                        url: 'q_transaction.php?f=add_detail_transaction',
                         type: "POST",
                         dataType: "json",
-                        data: $.parseJSON(product[i]),
+                        data: JSON.parse(product[i]),
                         success: function(result) {
-                            
+                            //var product=jQuery.parseJSON(result)
+                        },
+                        error: function() {
+                            //alert("failure");
                         }
                     });
-                };
+                }
+                // };
             });
         });
     </script>
