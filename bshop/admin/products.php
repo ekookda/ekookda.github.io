@@ -30,7 +30,7 @@ include 'layout_admin/sidebar.php';
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <!-- Button Add New Product modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAddProduct">
+                    <button type="button" class="btn btn-primary btn-rounded" data-bs-toggle="modal" data-bs-target="#modalAddProduct">
                         <i class="fas fa-plus-circle"></i>&nbsp;Add New Product
                     </button>
                 </div>
@@ -74,122 +74,121 @@ include 'layout_admin/sidebar.php';
     </a>
 
     <!-- Modal Form Add New Product -->
-    <div class="modal fade" id="modalAddProduct" tabindex="-1" aria-labelledby="labelAddProduk" aria-hidden="true">
+    <div class="modal fade" id="modalAddProduct" tabindex="-1" aria-labelledby="addProductLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title text-center" id="titleAddDataProduk" aria-label="Close"><i class="fab fa-product-hunt"></i>&nbsp;Add New Product</h4>
-                    </h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold"><i class="fab fa-product-hunt"></i>&nbsp;Add New Product</h4>
+                    <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div> <!-- end .modal-header -->
                 <!-- Modal body -->
                 <div class="modal-body">
                     <form action="query_product.php?f=add_product" id="form_add_product" method="POST">
                         <!-- Nama Produk -->
                         <div class="mb-3">
-                            <label for="lAddNamaProduk" class="form-label">Nama Produk</label>
-                            <input type="text" class="form-control" name="nama" id="nama" required>
+                            <label for="productNameLabel" class="form-label">Nama Produk</label>
+                            <input type="text" class="form-control" name="product_name" id="product_name" required>
                         </div>
                         <!-- SKU -->
                         <div class="mb-3">
-                            <label for="lAddSKU" class="form-label">Nomor SKU</label>
-                            <input type="text" class="form-control" name="sku" id="sku" required>
+                            <label for="productNameSku" class="form-label">Nomor SKU</label>
+                            <input type="text" class="form-control" name="product_sku" id="product_sku" required>
                         </div>
                         <!-- Stok -->
                         <div class="mb-3">
-                            <label for="lAddStok" class="form-label">Stok</label>
-                            <input type="number" class="form-control" name="stok" id="stok" required>
+                            <label for="productStok" class="form-label">Stok</label>
+                            <input type="number" class="form-control" name="product_stok" id="product_stok" required>
                         </div>
                         <!-- Alamat -->
                         <div class="mb-3">
-                            <label for="lAddHargaSatuan" class="form-label">Harga Satuan</label>
-                            <input type="text" class="form-control" name="harga_satuan" id="harga_satuan" required>
+                            <label for="productPriceLabel" class="form-label">Harga Satuan</label>
+                            <input type="text" class="form-control" name="product_price" id="product_price" required>
                         </div>
                         <!-- Foto Produk -->
-                        <div class="mb-3">
-                            <label for="lAddImageProduk" class="form-label">File Foto</label>
-                            <input type="file" class="form-control" id="img_url" name="img_url" required>
-                        </div>
-                        <div class="d-grid gap-2">
-                            <button type="submit" name="btn-add-product" id="btn_add_product" class="btn btn-primary">Tambah Produk</button>
-                        </div>
+                        <!-- <div class="mb-3">
+                            <label for="productImageLabel" class="form-label">File Foto</label>
+                            <input type="file" class="form-control" id="product_image" name="product_image">
+                        </div> -->
                     </form>
                 </div> <!-- end .modal-body -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" id="submit_add_product" class="btn btn-primary">Tambah Produk</button>
+                </div> <!-- end .modal-footer -->
             </div>
         </div>
     </div> <!-- End #Add New Product Modal -->
     <!-- End .modal-fade / Modal Registration -->
 
     <!-- Modal Form Update -->
-    <div class="modal fade" id="updateProduct" tabindex="-1" aria-labelledby="labelUpdateProduk" aria-hidden="true">
+    <div class="modal fade" id="update_product" tabindex="-1" aria-labelledby="updateProductLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title text-center" id="titleProduk" aria-label="Close"><i class="fab fa-product-hunt"></i> Update
-                        Data Produk</h4>
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold"><i class="fab fa-product-hunt"></i> Update Data Produk</h4>
                     </h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <form action="query_product.php?f=update_product" id="formUpdate" method="POST">
-                        <input type="hidden" name="produk_id" class="produk_id" required>
+                    <form action="query_product.php?f=update_product" id="form_update_product" method="POST">
+                        <input type="hidden" name="product_id" class="product_id" required>
                         <!-- Nama Produk -->
                         <div class="mb-3">
-                            <label for="lAddNamaProduk" class="form-label">Nama Produk</label>
-                            <input type="text" class="form-control" name="nama" id="nama" required>
+                            <label for="product_name_label" class="form-label">Nama Produk</label>
+                            <input type="text" class="form-control" name="update_product_name" id="update_product_name" required>
                         </div>
                         <!-- SKU -->
                         <div class="mb-3">
-                            <label for="lAddSKU" class="form-label">Nomor SKU</label>
-                            <input type="text" class="form-control" name="sku" id="sku" required>
+                            <label for="product_sku_label" class="form-label">Nomor SKU</label>
+                            <input type="text" class="form-control" name="update_product_sku" id="update_product_sku" required>
                         </div>
                         <!-- Stok -->
                         <div class="mb-3">
-                            <label for="lAddStok" class="form-label">Stok</label>
-                            <input type="number" class="form-control" name="stok" id="stok" required>
+                            <label for="product_stok_label" class="form-label">Stok</label>
+                            <input type="number" class="form-control" name="update_product_stok" id="update_product_stok" required>
                         </div>
                         <!-- Alamat -->
                         <div class="mb-3">
-                            <label for="lAddHargaSatuan" class="form-label">Harga Satuan</label>
-                            <input type="text" class="form-control" name="harga_satuan" id="harga_satuan" required>
+                            <label for="product_price_label" class="form-label">Harga Satuan</label>
+                            <input type="text" class="form-control" name="update_product_price" id="update_product_price" required>
                         </div>
                         <!-- Foto Produk -->
-                        <div class="mb-3">
-                            <label for="lAddImageProduk" class="form-label">File Foto</label>
-                            <input type="file" class="form-control" id="img_url" name="img_url" required>
+                        <!-- <div class="mb-3">
+                            <label for="product_image_label" class="form-label">File Foto</label>
+                            <input type="file" class="form-control" id="update_product_image" name="update_product_image">
                             <span>Abaikan jika tidak mengganti gambar</span>
-                        </div>
-                        <div class="d-grid gap-2">
-                            <button type="button" name="btn-update-product" id="btn-update-product" class="btn btn-primary">Simpan</button>
-                        </div>
+                        </div> -->
                     </form>
                 </div> <!-- end .modal-body -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" id="submit_update_product" class="btn btn-primary">Ubah Data Produk</button>
+                </div> <!-- end .modal-footer -->
             </div>
         </div>
     </div> <!-- End #registrasiModal -->
     <!-- End .modal-fade / Modal Registration -->
 
     <!-- Delete Modal -->
-    <div class="modal fade" id="modal_delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal_delete" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h4 class="modal-title w-100 font-weight-bold">Delete</h4>
+                    <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="query_product.php?f=delete_product" method="POST" id="form_delete">
-                        <input type="hidden" name="produk_id" class="form-control produk_id">
+                    <form action="query_product.php?f=delete_product" method="POST" id="form_delete_product">
+                        <input type="hidden" name="product_id" class="form-control product_id">
                 </div>
-                <h3 class="text-center">Anda yakin menghapus produk ini?</h3>
+                <h4 class="text-center">Item akan dihapus dari database.<br>Yakin??</h4>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Yes</button>
+                    <button type="submit" id="btn_form_delete" class="btn btn-danger">Yes</button>
                     </form>
                 </div>
             </div>
@@ -201,27 +200,26 @@ include 'layout_admin/sidebar.php';
     <script>
         $(document).ready(function() {
             // Insert data
-            $('#btn_add_product').on('submit', '#form_add_product', function(e) {
+            $('#submit_add_product').on('click', function(e) {
                 let url = $('#form_add_product').attr('action');
+                let data = $('#form_add_product').serialize();
                 $.ajax({
                     url: url,
                     type: 'POST',
-                    data: $('#form_add_product').serialize(),
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    success: function(data) {
-                        console.log($('#form_add_product').serialize())
-                        $('#modalAddProduct').modal('hide');
-                        $('#table_product').DataTable().ajax.reload();
-                        $('#form_add_product')[0].reset();
-                        alert(data);
-                        window.setTimeout(
-                            function() {
-                                location.reload(true)
-                            },
-                            2000
-                        );
+                    data: data,
+                    success: function(response) {
+                        let d = $.parseJSON(response);
+                        if (d.status == 1) {
+                            $('#modalAddProduct').modal('hide');
+                            $('#form_add_product')[0].reset();
+                            $('#product_table').DataTable().ajax.reload();
+                            alert(d.message);
+                            window.setTimeout(function() {
+                                location.reload();
+                            }, 2000);
+                        } else {
+                            alert(d.message);
+                        }
                     },
                     error(err) {
                         console.log(err);
@@ -256,7 +254,7 @@ include 'layout_admin/sidebar.php';
                         data: 'harga_satuan'
                     },
                     {
-                        defaultContent: '<button class="btn btn-primary btn-sm update" data-bs-toggle="modal" data-bs-target="#updateProduct"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-danger btn-sm delete"><i class="fas fa-trash-alt"></i></button>'
+                        defaultContent: '<button class="btn btn-primary btn-sm update" data-bs-toggle="modal" data-bs-target="#update_product"><i class="fas fa-edit"></i></button><button type="button" class="btn btn-danger btn-sm delete"><i class="fas fa-trash-alt"></i></button>'
                     }
                 ],
             });
@@ -264,63 +262,80 @@ include 'layout_admin/sidebar.php';
             // Menampilkan data customer ke dalam form update
             $('#table_product tbody').on('click', '.update', function() {
                 let row = $(this).closest('tr');
-                let produk_id = tableProduct.row(row).data().produk_id;
+                let product_id = tableProduct.row(row).data().produk_id;
                 $.ajax({
-                    url: 'query_product.php?f=get_product_by_id&id=' + produk_id,
+                    url: 'query_product.php?f=get_product_by_id&id=' + product_id,
                     type: 'POST',
                     success: function(result) {
-                        let data = jQuery.parseJSON(result);
+                        let data = $.parseJSON(result);
                         $('#updateProduct').modal('show');
-                        $('#nama').val(data.nama);
-                        $('#sku').val(data.sku);
-                        $('#stok').val(data.stok);
-                        $('#harga_satuan').val(data.harga_satuan);
-                        //$('#img_url').val(data.img_url); // Image
-                        $('.produk_id').val(data.produk_id);
+                        $('#update_product_name').val(data.nama);
+                        $('#update_product_sku').val(data.sku);
+                        $('#update_product_stok').val(data.stok);
+                        $('#update_product_price').val(data.harga_satuan);
+                        // $('#update_product_image').val(data.img_url); // Image
+                        $('.product_id').val(data.produk_id);
                     },
                     error: function(data) {
                         console.log(data);
                     }
                 });
             });
-
             // Menyimpan data produk yang di update
-            $("#formUpdate").on('click', function() {
-                let url = $(this).attr('action');
+            $("#submit_update_product").on('click', function(e) {
+                let url = $('#form_update_product').attr('action');
                 $.ajax({
                     type: "POST",
                     url: url,
-                    data: $("#formUpdate").serialize(),
+                    data: $("#form_update_product").serialize(),
                     success: function(result) {
-                        $("#updateProduct").modal('hide');
-                        alert(result);
-                        window.setTimeout(
-                            function() {
-                                location.reload(true)
-                            },
-                            3000
-                        );
+                        // console.log(result);
+                        let d = $.parseJSON(result);
+                        if (d.status == 1) {
+                            $("#update_product").modal('hide');
+                            $('#table_product').DataTable().ajax.reload();
+                            $('#form_update_product')[0].reset();
+                            alert(d.message);
+                        } else {
+                            alert(d.message);
+                        }
                     },
                     error: function(error) {
                         alert(error);
                     }
                 });
-                return false;
+                e.preventDefault();
             });
 
             // Menghapus data product
-            $('#table_product tbody').on('click', '.delete', function() {
+            $('#table_product tbody').on('click', '.delete', function(e) {
                 let row = $(this).closest('tr');
-                let produk_id = tableProduct.row(row).data().produk_id;
+                let product_id = tableProduct.row(row).data().produk_id;
                 $("#modal_delete").modal('show');
-                $('.produk_id').val(produk_id);
-                alert('Record deleted successfully');
-                window.setTimeout(
-                    function() {
-                        location.reload(true)
+                $('.product_id').val(product_id);
+                e.preventDefault();
+            });
+            $('#btn_form_delete').on('click', function(e) {
+                $.ajax({
+                    url: 'query_product.php?f=delete_product',
+                    type: 'POST',
+                    data: $('#form_delete_product').serialize(),
+                    success: function(response) {
+                        let d = $.parseJSON(response)
+                        if (d.status == 1) {
+                            $('#modal_delete').modal('hide');
+                            $('#table_product').DataTable().ajax.reload();
+                            $('#form_delete_product')[0].reset();
+                            alert(d.message);
+                        } else {
+                            alert(d.message);
+                        }
                     },
-                    3000
-                );
+                    error(err) {
+                        console.log(err);
+                    }
+                });
+                e.preventDefault();
             });
         });
         // End jQready
