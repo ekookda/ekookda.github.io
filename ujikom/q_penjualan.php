@@ -50,30 +50,28 @@ function add_penjualan($conn) {
 }
 
 function get_penjualan_by_id($conn, $id) {
-    $query = "SELECT id, kno_penjualan, nama_kasir, tgl_penjualan, jam_penjualan,total FROM tbl_penjualan WHERE id='$id'";
+    $query = "SELECT id, no_penjualan, nama_kasir, tgl_penjualan, jam_penjualan, total FROM tbl_penjualan WHERE id='$id'";
     $result = $conn->query($query);
     $result_array = $result->fetch_all(MYSQLI_ASSOC);
     echo json_encode($result_array[0]);
 }
 
 function update_penjualan($conn) {
-    $penjualan_id = validasi_input($_POST['penjualan_id']); // ID barang
-    $penjualan_code = validasi_input($_POST['update_penjualan_code']); // kode barang
-    $penjualan_name = validasi_input($_POST['update_penjualan_name']); // nama barang
-    $penjualan_buy = validasi_input($_POST['update_penjualan_buy']); // harga beli
-    $penjualan_sell = validasi_input($_POST['update_penjualan_sell']); // harga jual
-    $penjualan_stok = validasi_input($_POST['update_penjualan_stok']); // stok
-    $penjualan_satuan = validasi_input($_POST['update_penjualan_satuan']); // satuan
+    $penjualan_id = validasi_input($_POST['penjualan_id']); // ID penjualan
+    $penjualan_number = validasi_input($_POST['update_penjualan_number']); // nomor penjualan
+    $cashier_name = validasi_input($_POST['update_cashier_name']); // nama kasir
+    $tgl_penjualan = validasi_input($_POST['update_tgl_penjualan']); // Tanggal Penjualan
+    $jam_penjualan = validasi_input($_POST['update_jam_penjualan']); // Jam Penjualan
+    $total_penjualan = validasi_input($_POST['update_penjualan_total']); // Total Penjualan
 
     $query = "UPDATE tbl_penjualan
-                SET 
-                    kode_barang='$penjualan_code', nama_barang='$penjualan_name', harga_beli='$penjualan_buy', harga_jual='$penjualan_sell', stok='$penjualan_stok', satuan='$penjualan_satuan'
+                SET no_penjualan='$penjualan_number', nama_kasir='$cashier_name', tgl_penjualan='$tgl_penjualan', jam_penjualan='$jam_penjualan', total='$total_penjualan'
                 WHERE id='$penjualan_id'";
     if($conn->query($query) === TRUE) {
         echo json_encode(
             array(
                 'status' => 1,
-                'message' => 'Record has been updated successfully!'
+                'message' => 'Record penjualan has been updated successfully!'
             )
         );
     } else {
