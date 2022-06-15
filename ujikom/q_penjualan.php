@@ -24,16 +24,13 @@ function get_all_penjualan($conn) {
 }
 
 function add_penjualan($conn) {
-    $penjualan_code = validasi_input($_POST['penjualan_number']); // kode barang
-    $penjualan_name = validasi_input($_POST['penjualan_name']); // nama barang
-    $penjualan_buy = validasi_input($_POST['penjualan_buy']); // harga beli
-    $penjualan_sell = validasi_input($_POST['penjualan_sell']); // harga jual
-    $penjualan_stok = validasi_input($_POST['penjualan_stok']); // stok
-    $penjualan_satuan = validasi_input($_POST['penjualan_satuan']); // satuan
+    $penjualan_number = validasi_input($_POST['penjualan_number']); // nomor penjualan
+    $cashier_name = validasi_input($_POST['cashier_name']); // nama kasir
+    $tgl_penjualan = validasi_input($_POST['tgl_penjualan']); // Tanggal Penjualan
+    $jam_penjualan = validasi_input($_POST['jam_penjualan']); // Jam Penjualan
+    $total_penjualan = validasi_input($_POST['total_penjualan']); // Total Penjualan
 
-    $query = "INSERT INTO tbl_penjualan (no_penjualan, nama_kasir, tgl_penjualan, jam_penjualan,total) VALUES (
-
-    )";
+    $query = "INSERT INTO tbl_penjualan (no_penjualan, nama_kasir, tgl_penjualan, jam_penjualan,total) VALUES ('$penjualan_number', '$cashier_name', '$tgl_penjualan', '$jam_penjualan', '$total_penjualan')";
 
     if ($conn->query($query) === TRUE) {
         echo json_encode(

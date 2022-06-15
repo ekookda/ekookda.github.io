@@ -261,7 +261,55 @@ include 'layout_admin/sidebar.php';
         </div>
     </div>
 
-    <!-- Modal Bagian Penjualan -->
+    <!-- ##################### Modal Bagian Penjualan ################### -->
+    <!-- Modal Form Add New Penjualan -->
+    <div class="modal fade" id="modalAddPenjualan" tabindex="-1" aria-labelledby="addPenjualanLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold"><i class="fab fa-product-hunt"></i>&nbsp;Tambah Penjualan</h4>
+                    <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div> <!-- end .modal-header -->
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="q_penjualan.php?f=add_penjualan" id="form_add_penjualan" method="POST">
+                        <!-- Nomor Penjualan -->
+                        <div class="mb-3">
+                            <label for="penjualan_number_label" class="form-label">Nomor Penjualan</label>
+                            <input type="text" class="form-control" name="penjualan_number" id="penjualan_number" required>
+                        </div>
+                        <!-- Nama Kasir -->
+                        <div class="mb-3">
+                            <label for="cashierNameLabel" class="form-label">Nama Kasir</label>
+                            <input type="text" class="form-control" name="cashier_name" id="cashier_name" required>
+                        </div>
+                        <!-- Tanggal Penjualan -->
+                        <div class="mb-3">
+                            <label for="tgl_penjualan_label" class="form-label">Tanggal Penjualan</label>
+                            <input type="text" class="form-control" name="tgl_penjualan" id="tgl_penjualan" required>
+                        </div>
+                        <!-- Jam Penjualan -->
+                        <div class="mb-3">
+                            <label for="jam_penjualan_label" class="form-label">Jam Penjualan</label>
+                            <input type="text" class="form-control" name="jam_penjualan" id="jam_penjualan" required>
+                        </div>
+                        <!-- Total -->
+                        <div class="mb-3">
+                            <label for="total_penjualan" class="form-label">Total</label>
+                            <input type="text" class="form-control" name="total_penjualan" id="total_penjualan" required>
+                        </div>
+                    </form>
+                </div> <!-- end .modal-body -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" id="submit_add_penjualan" class="btn btn-primary">Tambah Penjualan</button>
+                </div> <!-- end .modal-footer -->
+            </div>
+        </div>
+    </div> <!-- End #Add New Penjualan Modal -->
+    <!-- End .modal-fade / Modal Penjualan -->
+
     <!-- Delete Modal Penjualan -->
     <div class="modal fade" id="modal_delete_penjualan" tabindex="-1" aria-labelledby="deletePenjualanLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -398,7 +446,6 @@ include 'layout_admin/sidebar.php';
                 e.preventDefault();
             });
 
-
             // Menghapus data product
             $('#table_product tbody').on('click', '.delete', function(e) {
                 let row = $(this).closest('tr');
@@ -459,7 +506,36 @@ include 'layout_admin/sidebar.php';
                 ],
             });
 
-            // Menghapus data product
+            // Insert data
+            $('#submit_add_penjualan').on('click', function(e) {
+                let url = $('#form_add_penjualan').attr('action');
+                let data = $('#form_add_penjualan').serialize();
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: data,
+                    success: function(response) {
+                        let d = $.parseJSON(response);
+                        if (d.status == 1) {
+                            $('#modalAddPenjualan').modal('hide');
+                            $('#form_add_penjualan')[0].reset();
+                            $('#table_penjualan').DataTable().ajax.reload();
+                            alert(d.message);
+                            window.setTimeout(function() {
+                                location.reload();
+                            }, 2000);
+                        } else {
+                            alert(d.message);
+                        }
+                    },
+                    error(err) {
+                        console.log(err);
+                    }
+                });
+                e.preventDefault();
+            });
+
+            // Menghapus data penjualan
             $('#table_penjualan tbody').on('click', '.delete_penjualan', function(e) {
                 let row = $(this).closest('tr');
                 let penjualan_id = tablePenjualan.row(row).data().id;
