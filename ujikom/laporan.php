@@ -17,32 +17,30 @@ include 'layout_admin/sidebar.php';
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h1 class="h3 mb-0 text-gray-800">
-                        <i class="fab fa-product-hunt"></i>&nbsp;Tabel Barang
+                        <i class="fab fa-product-hunt"></i>&nbsp;Laporan Penjualan
                     </h1>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="table_product" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="table_laporan" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th></th>
                                     <th>Kode Barang</th>
                                     <th>Nama Barang</th>
-                                    <th>Harga Beli</th>
                                     <th>Harga Jual</th>
-                                    <th>Stok</th>
+                                    <th>Jumlah Penjualan</th>
                                     <th>Satuan</th>
+                                    <th>Total Penjualan</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th></th>
                                     <th>Kode Barang</th>
                                     <th>Nama Barang</th>
-                                    <th>Harga Beli</th>
                                     <th>Harga Jual</th>
-                                    <th>Stok</th>
+                                    <th>Jumlah Penjualan</th>
                                     <th>Satuan</th>
+                                    <th>Total Penjualan</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -64,12 +62,9 @@ include 'layout_admin/sidebar.php';
     <script>
         $(document).ready(function() {
             // Menampilkan data barang ke tabel
-            let tableProduct = $('#table_product').DataTable({
-                ajax: 'q_product.php?f=get_all_product',
-                columns: [{
-                        data: 'id',
-                        visible: false
-                    },
+            let table_laporan = $('#table_laporan').DataTable({
+                ajax: 'q_laporan.php?f=get_laporan',
+                columns: [
                     {
                         data: 'kode_barang'
                     },
@@ -77,16 +72,16 @@ include 'layout_admin/sidebar.php';
                         data: 'nama_barang'
                     },
                     {
-                        data: 'harga_beli'
-                    },
-                    {
                         data: 'harga_jual'
                     },
                     {
-                        data: 'stok'
+                        data: 'JumlahPenjualan'
                     },
                     {
                         data: 'satuan'
+                    },
+                    {
+                        data: 'TotalPenjualan'
                     }
                 ],
             });
