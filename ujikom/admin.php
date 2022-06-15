@@ -310,6 +310,57 @@ include 'layout_admin/sidebar.php';
     </div> <!-- End #Add New Penjualan Modal -->
     <!-- End .modal-fade / Modal Penjualan -->
 
+    <!-- Modal Form Update Penjualan -->
+    <div class="modal fade" id="update_penjualan" tabindex="-1" aria-labelledby="updatePenjualanLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold"><i class="fab fa-product-hunt"></i> Update Data Penjualan</h4>
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form action="q_penjualan.php?f=update_penjualan" id="form_update_penjualan" method="POST">
+                        <input type="hidden" name="penjualan_id" class="penjualan_id" required>
+                        <!-- Nomor Penjualan -->
+                        <div class="mb-3">
+                            <label for="penjualan_number_label" class="form-label">Nomor Penjualan</label>
+                            <input type="text" class="form-control" name="update_penjualan_number" id="update_penjualan_number" required>
+                        </div>
+                        <!-- Nama Kasir -->
+                        <div class="mb-3">
+                            <label for="cashier_name_label" class="form-label">Nama Kasir</label>
+                            <input type="text" class="form-control" name="update_cashier_name" id="update_cashier_name" required>
+                        </div>
+                        <!-- Tanggal Penjualan -->
+                        <div class="mb-3">
+                            <label for="penjualan_buy_label" class="form-label">Tanggal Penjualan</label>
+                            <input type="text" class="form-control" name="update_tgl_penjualan" id="update_tgl_penjualan" required>
+                        </div>
+                        <!-- Jam Penjualan -->
+                        <div class="mb-3">
+                            <label for="penjualan_jam_label" class="form-label">Harga Jual</label>
+                            <input type="text" class="form-control" name="update_jam_penjualan" id="update_jam_penjualan" required>
+                        </div>
+                        <!-- Total -->
+                        <div class="mb-3">
+                            <label for="penjualan_total_label" class="form-label">Total</label>
+                            <input type="text" class="form-control" name="update_penjualan_total" id="update_penjualan_total" required>
+                        </div>
+                    </form>
+                </div> <!-- end .modal-body -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" id="submit_update_penjualan" class="btn btn-primary">Ubah Data Penjualan</button>
+                </div> <!-- end .modal-footer -->
+            </div>
+        </div>
+    </div> <!-- End #Update Modal -->
+    <!-- End .modal-fade / Modal Update Penjualan -->
+
     <!-- Delete Modal Penjualan -->
     <div class="modal fade" id="modal_delete_penjualan" tabindex="-1" aria-labelledby="deletePenjualanLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -533,6 +584,54 @@ include 'layout_admin/sidebar.php';
                     }
                 });
                 e.preventDefault();
+            });
+
+            // Menampilkan data penjualan ke dalam form update
+            $('#table_penjualan tbody').on('click', '.update', function() {
+                let row = $(this).closest('tr');
+                let penjualan_id = tablePenjualan.row(row).data().id;
+                $.ajax({
+                    url: 'q_penjualan.php?f=get_penjualan_by_id&id=' + penjualan_id,
+                    type: 'POST',
+                    success: function(result) {
+                        let data = $.parseJSON(result);
+                        $('#updateProduct').modal('show');
+                        $('#update_penjualan_number').val(data.no_penjualan);
+                        $('#update_cashier_name').val(data.nama_kasir);
+                        $('#update_tgl_penjualan').val(data.tgl_penjualan);
+                        $('#update_jam_penjualan').val(data.jam_penjualan);
+                        $('#update_penjualan_total').val(data.total);
+                        $('.penjualan_id').val(data.id);
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                });
+            });
+            // Menyimpan data penjualan yang di update
+            $("#submit_update_penjualan").on('click', function(e) {
+                let url = $('#form_update_penjualan').attr('action');
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: $("#form_update_penjualan").serialize(),
+                    success: function(result) {
+                        // console.log(result);
+                        let d = $.parseJSON(result);
+                        if (d.status == 1) {
+                            $("#update_penjualan").modal('hide');
+                            $('#table_penjualan').DataTable().ajax.reload();
+                            $('#form_update_penjualan')[0].reset();
+                            alert(d.message);
+                        } else {
+                            alert(d.message);
+                        }
+                    },
+                    error: function(error) {
+                        alert(error);
+                    }
+                });
+                // e.preventDefault();
             });
 
             // Menghapus data penjualan
